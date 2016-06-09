@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/main_pg00"
+            android:title="主頁" />
+        <item
+            android:id="@+id/new_prop_pg01"
+            android:title="一手新盤" />
+        <item android:title="推播通知">
+            <menu>
+                <item
+                    android:id="@+id/my_noti_pg02tb01"
+                    android:title="     我的通知" />
+                <item
+                    android:id="@+id/my_subcribe_pg02tb02"
+                    android:title="     我的訂閱" />
+                <item
+                    android:id="@+id/noti_setting_pg02tb03"
+                    android:title="     通知設定" />
+            </menu>
+        </item>
+        <item
+            android:id="@+id/hot_pg01"
+            android:title="火熱發售中!" />
+        <item
+            android:id="@+id/sales_pg01"
+            android:title="最新優惠!" />
+        <item
+            android:id="@+id/draw_pg04"
+            android:title="中抽籤結果公報" />
+        <item
+            android:id="@+id/cal_tools"
+            android:title="計算工具" />
+        <item
+            android:id="@+id/settings_pr"
+            android:title="設定" />
+        <item
+            android:id="@+id/about_pg50"
+            android:title="關於我們" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Share" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Send" />
+        </menu>
+    </item>
+
+</menu>
