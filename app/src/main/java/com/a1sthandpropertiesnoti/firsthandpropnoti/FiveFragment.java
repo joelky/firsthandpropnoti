@@ -1,4 +1,4 @@
-package com.a1sthandpropertiesnoti.fisthandpropnoti;
+package com.a1sthandpropertiesnoti.firsthandpropnoti;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -6,9 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class TwoFragment extends Fragment{
+public class FiveFragment extends Fragment{
 
-    public TwoFragment() {
+    public FiveFragment() {
         // Required empty public constructor
     }
 
@@ -21,7 +21,7 @@ public class TwoFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_two, container, false);
+        return inflater.inflate(R.layout.fragment_five, container, false);
     }
 
 }

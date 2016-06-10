@@ -1,4 +1,4 @@
-package com.a1sthandpropertiesnoti.fisthandpropnoti;
+package com.a1sthandpropertiesnoti.firsthandpropnoti;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -21,7 +21,7 @@ public class FourFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_four, container, false);
+        return inflater.inflate(com.a1sthandpropertiesnoti.firsthandpropnoti.R.layout.fragment_four, container, false);
     }
 
 }

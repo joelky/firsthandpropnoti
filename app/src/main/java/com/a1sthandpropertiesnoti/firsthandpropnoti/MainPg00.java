@@ -1,4 +1,4 @@
-package com.a1sthandpropertiesnoti.fisthandpropnoti;
+package com.a1sthandpropertiesnoti.firsthandpropnoti;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
