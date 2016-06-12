@@ -9,7 +9,7 @@
     tools:openDrawer="start">
 
     <!--
-    Toolbarw
+    Toolbar
     -->
     <include
         layout="@layout/app_bar_main"
