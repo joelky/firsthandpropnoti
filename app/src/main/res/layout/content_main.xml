@@ -17,17 +17,20 @@
         android:id="@+id/main_upper"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:text="上方" />
     <TextView
         android:id="@+id/main_middle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:text="中央"
         android:layout_below="@+id/main_upper"/>
     <TextView
         android:id="@+id/main_lower"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:text="下方"
         android:layout_below="@+id/main_middle"/>
 </RelativeLayout>
