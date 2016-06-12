@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         /*
-        Drawer
+        Drawer (navigation view)
         */
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -69,6 +69,8 @@ public class MainActivity extends AppCompatActivity
         setupViewPager(viewPager);
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
+
+        //Assigns the ViewPager to TabLayout
         tabLayout.setupWithViewPager(viewPager);
 
         /*
@@ -86,6 +88,7 @@ public class MainActivity extends AppCompatActivity
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
+    //End Of OnCreate
 
     @Override
     public void onBackPressed() {
@@ -97,6 +100,9 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    /*
+    OptionsMenu
+    */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -119,6 +125,9 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    /*
+    Navigation view - on select
+    */
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -128,12 +137,14 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.main_pg00) {
 //            Toast.makeText(context, "main_pg00", Toast.LENGTH_SHORT).show();
             Log.i("clicks", "You Clicked main_pg00");
-            Intent i = new Intent(MainActivity.this, MainPg00.class);
+            Intent i = new Intent(MainActivity.this, Pg00Main.class);
             startActivity(i);
         } else if (id == R.id.new_prop_pg01) {
 
         } else if (id == R.id.my_noti_pg02tb01) {
-
+            Log.i("clicks", "You Clicked pg02Push");
+            Intent i = new Intent(MainActivity.this, Pg02Push.class);
+            startActivity(i);
         } else if (id == R.id.my_subcribe_pg02tb02) {
 
         } else if (id == R.id.noti_setting_pg02tb03) {
@@ -163,9 +174,11 @@ public class MainActivity extends AppCompatActivity
     */
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new OneFragment(), "ONE");
-        adapter.addFragment(new TwoFragment(), "TWO");
-        adapter.addFragment(new ThreeFragment(), "THREE");
+        adapter.addFragment(new OneFragment(), "我的通知");     // OneFragment - tab content page. 我的通知 - Tab name
+        adapter.addFragment(new TwoFragment(), "全部通知");
+        adapter.addFragment(new ThreeFragment(), "重大通知");
+        adapter.addFragment(new FourFragment(), "我的訂閱");
+        adapter.addFragment(new FiveFragment(), "設定通知");
         viewPager.setAdapter(adapter);
     }
 
@@ -209,28 +222,28 @@ public class MainActivity extends AppCompatActivity
         client.disconnect();
     }
 
-    class ViewPagerAdapter extends FragmentPagerAdapter {
-        private final List<Fragment> mFragmentList = new ArrayList<>();
-        private final List<String> mFragmentTitleList = new ArrayList<>();
+        class ViewPagerAdapter extends FragmentPagerAdapter {
+            private final List<Fragment> mFragmentList = new ArrayList<>();
+            private final List<String> mFragmentTitleList = new ArrayList<>();
 
-        public ViewPagerAdapter(FragmentManager manager) {
-            super(manager);
-        }
+            public ViewPagerAdapter(FragmentManager manager) {
+                super(manager);
+            }
 
-        @Override
-        public Fragment getItem(int position) {
-            return mFragmentList.get(position);
-        }
+            @Override
+            public Fragment getItem(int position) {
+                return mFragmentList.get(position);
+            }
 
-        @Override
-        public int getCount() {
-            return mFragmentList.size();
-        }
+            @Override
+            public int getCount() {
+                return mFragmentList.size();
+            }
 
-        public void addFragment(Fragment fragment, String title) {
-            mFragmentList.add(fragment);
-            mFragmentTitleList.add(title);
-        }
+            public void addFragment(Fragment fragment, String title) {
+                mFragmentList.add(fragment);
+                mFragmentTitleList.add(title);
+            }
 
         @Override
         public CharSequence getPageTitle(int position) {
