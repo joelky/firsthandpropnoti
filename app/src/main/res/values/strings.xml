@@ -3,6 +3,9 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="pg01">一手新盤</string>
+    <string name="pg00">主頁</string>
+
     <string name="pg02Tb01">我的通知</string>
     <string name="pg02Tb02">全部通知</string>
     <string name="pg02Tb03">重大通知</string>

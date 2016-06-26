@@ -8,8 +8,16 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
+    <include layout="@layout/content_main" />
+
+    <!-- The main content view where fragments are loaded -->
+    <FrameLayout
+        android:id="@+id/flContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <!--
-    Toolbarw
+    Toolbar
     -->
     <include
         layout="@layout/app_bar_main"
@@ -17,7 +25,7 @@
         android:layout_height="match_parent" />
 
     <!--
-    NavigationView 滑欄效果
+    NavigationView
     -->
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"

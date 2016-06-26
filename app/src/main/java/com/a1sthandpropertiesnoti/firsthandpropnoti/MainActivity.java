@@ -45,26 +45,28 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         /*
-        Toolbar
+        Toolbar - Set a Toolbar to replace the ActionBar.
         */
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         /*
-        Drawer (navigation view)
+        Drawer Layout (left side drawer)
         */
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        //Drawer Toggle (亖 drawer  button)
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-
+        //Navigation View (drawer) - Initialize
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         /*
         Tab
         */
+/*
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 
@@ -72,7 +74,7 @@ public class MainActivity extends AppCompatActivity
 
         //Assigns the ViewPager to TabLayout
         tabLayout.setupWithViewPager(viewPager);
-
+*/
         /*
         FloatingActionButton
         */
@@ -90,14 +92,81 @@ public class MainActivity extends AppCompatActivity
     }
     //End Of OnCreate
 
+    /*
+    Navigation view - on select
+    */
+    @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        Fragment fragment = null;
+        Class fragmentClass;
+
+
+        if (id == R.id.main_pg00) {
+//            Toast.makeText(context, "main_pg00", Toast.LENGTH_SHORT).show();
+/*            Intent i = new Intent(MainActivity.this, Pg00Main.class);
+            startActivity(i);*/
+            fragmentClass = Pg00Main.class;
+        } else if (id == R.id.new_prop_pg01) {
+            fragmentClass = Pg01NewProp.class;
+        } else if (id == R.id.my_noti_pg02tb01) {
+/*            Intent i = new Intent(MainActivity.this, Pg02Push.class);
+            startActivity(i);*/
+            fragmentClass = Pg01NewProp.class;
+        } else if (id == R.id.my_subcribe_pg02tb02) {
+            fragmentClass = Pg01NewProp.class;
+        } else if (id == R.id.noti_setting_pg02tb03) {
+            fragmentClass = Pg01NewProp.class;
+        } else if (id == R.id.hot_pg01) {
+            fragmentClass = Pg01NewProp.class;
+        } else if (id == R.id.sales_pg01) {
+            fragmentClass = Pg01NewProp.class;
+        } else if (id == R.id.draw_pg04) {
+            fragmentClass = Pg01NewProp.class;
+        } else if (id == R.id.settings_pr) {
+            fragmentClass = Pg01NewProp.class;
+        } else if (id == R.id.nav_share) {
+            fragmentClass = Pg01NewProp.class;
+        } else if (id == R.id.nav_send) {
+            fragmentClass = Pg01NewProp.class;
         }
+        else {
+            fragmentClass = Pg00Main.class;
+        }
+
+/*
+
+        switch(id) {
+            case R.id.main_pg00:
+                fragmentClass = Pg00Main.class;
+                break;
+            case R.id.new_prop_pg01:
+                fragmentClass = Pg02Push.class;
+                break;
+            case R.id.my_noti_pg02tb01:
+                fragmentClass = Pg02Push.class;
+                break;
+            default:
+                fragmentClass = Pg02Push.class;
+        }
+*/
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        // Insert the fragment by replacing any existing fragment
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 
     /*
@@ -126,52 +195,9 @@ public class MainActivity extends AppCompatActivity
     }
 
     /*
-    Navigation view - on select
-    */
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.main_pg00) {
-//            Toast.makeText(context, "main_pg00", Toast.LENGTH_SHORT).show();
-            Log.i("clicks", "You Clicked main_pg00");
-            Intent i = new Intent(MainActivity.this, Pg00Main.class);
-            startActivity(i);
-        } else if (id == R.id.new_prop_pg01) {
-
-        } else if (id == R.id.my_noti_pg02tb01) {
-            Log.i("clicks", "You Clicked pg02Push");
-            Intent i = new Intent(MainActivity.this, Pg02Push.class);
-            startActivity(i);
-        } else if (id == R.id.my_subcribe_pg02tb02) {
-
-        } else if (id == R.id.noti_setting_pg02tb03) {
-
-        } else if (id == R.id.hot_pg01) {
-
-        } else if (id == R.id.sales_pg01) {
-
-        } else if (id == R.id.draw_pg04) {
-
-        } else if (id == R.id.settings_pr) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-
-    }
-
-    /*
     Tab
     */
+/*
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new OneFragment(), "我的通知");     // OneFragment - tab content page. 我的通知 - Tab name
@@ -181,6 +207,38 @@ public class MainActivity extends AppCompatActivity
         adapter.addFragment(new FiveFragment(), "設定通知");
         viewPager.setAdapter(adapter);
     }
+*/
+
+/*
+        class ViewPagerAdapter extends FragmentPagerAdapter {
+            private final List<Fragment> mFragmentList = new ArrayList<>();
+            private final List<String> mFragmentTitleList = new ArrayList<>();
+
+            public ViewPagerAdapter(FragmentManager manager) {
+                super(manager);
+            }
+
+            @Override
+            public Fragment getItem(int position) {
+                return mFragmentList.get(position);
+            }
+
+            @Override
+            public int getCount() {
+                return mFragmentList.size();
+            }
+
+            public void addFragment(Fragment fragment, String title) {
+                mFragmentList.add(fragment);
+                mFragmentTitleList.add(title);
+            }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
+        }
+    }
+*/
 
     @Override
     public void onStart() {
@@ -222,32 +280,17 @@ public class MainActivity extends AppCompatActivity
         client.disconnect();
     }
 
-        class ViewPagerAdapter extends FragmentPagerAdapter {
-            private final List<Fragment> mFragmentList = new ArrayList<>();
-            private final List<String> mFragmentTitleList = new ArrayList<>();
-
-            public ViewPagerAdapter(FragmentManager manager) {
-                super(manager);
-            }
-
-            @Override
-            public Fragment getItem(int position) {
-                return mFragmentList.get(position);
-            }
-
-            @Override
-            public int getCount() {
-                return mFragmentList.size();
-            }
-
-            public void addFragment(Fragment fragment, String title) {
-                mFragmentList.add(fragment);
-                mFragmentTitleList.add(title);
-            }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mFragmentTitleList.get(position);
+    /*
+    Android navigation button
+    */
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
         }
     }
+
 }
