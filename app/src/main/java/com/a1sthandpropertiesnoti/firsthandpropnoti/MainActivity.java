@@ -126,7 +126,11 @@ public class MainActivity extends AppCompatActivity
             fragmentClass = Pg01NewProp.class;
         } else if (id == R.id.draw_pg04) {
             fragmentClass = Pg01NewProp.class;
+        } else if (id == R.id.tools_pg60) {
+            fragmentClass = Pg01NewProp.class;
         } else if (id == R.id.settings_pr) {
+            fragmentClass = Pg01NewProp.class;
+        } else if (id == R.id.about_pg50) {
             fragmentClass = Pg01NewProp.class;
         } else if (id == R.id.nav_share) {
             fragmentClass = Pg01NewProp.class;
