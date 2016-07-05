@@ -6,9 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class FourFragment extends Fragment{
+public class Pg02Tab05NotiSetting extends Fragment{
 
-    public FourFragment() {
+    public Pg02Tab05NotiSetting() {
         // Required empty public constructor
     }
 
@@ -21,7 +21,7 @@ public class FourFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(com.a1sthandpropertiesnoti.firsthandpropnoti.R.layout.fragment_four, container, false);
+        return inflater.inflate(R.layout.pg02tab05_notisetting, container, false);
     }
 
 }

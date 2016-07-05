@@ -3,12 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.a1sthandpropertiesnoti.firsthandpropnoti.OneFragment">
+    tools:context=".Pg02Tab01MyPush">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/pg02Tb01"
+        android:text="@string/pg02Tb02"
         android:textSize="40dp"
         android:textStyle="bold"
         android:layout_centerInParent="true"/>

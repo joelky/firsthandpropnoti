@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,23 +15,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentManager;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Toolbar toolbar;
-    private TabLayout tabLayout;
-    private ViewPager viewPager;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -46,35 +37,58 @@ public class MainActivity extends AppCompatActivity
 
         /*
         Toolbar - Set a Toolbar to replace the ActionBar.
+        Initializing Toolbar and setting it as the actionbar
         */
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        //getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         /*
         Drawer Layout (left side drawer)
         */
+        //Drawer Toggle (亖 spinning hamburger)
+        //Initializing Drawer Layout and ActionBarToggle
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        //Drawer Toggle (亖 drawer  button)
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                // Code here will be triggered once the drawer closes as we dont want anything to happen so we leave this blank
+                super.onDrawerClosed(drawerView);
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                // Code here will be triggered once the drawer open as we dont want anything to happen so we leave this blank
+
+                super.onDrawerOpened(drawerView);
+            }
+        };
+        //Set the actionbarToggle to drawer layout
         drawer.setDrawerListener(toggle);
+        //calling sync state is necessay or else your hamburger icon wont show up
         toggle.syncState();
+
         //Navigation View (drawer) - Initialize
+        //Initializing NavigationView
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         /*
-        Tab
+        Fragment - Include the fragment page: Pg00Main
         */
-/*
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
-        setupViewPager(viewPager);
+        Fragment fragment = null;
+        Class fragmentClass;
+        fragmentClass = Pg00Main.class;
+        // Insert the fragment by replacing any existing fragment
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
 
-        tabLayout = (TabLayout) findViewById(R.id.tabs);
-
-        //Assigns the ViewPager to TabLayout
-        tabLayout.setupWithViewPager(viewPager);
-*/
         /*
         FloatingActionButton
         */
@@ -102,23 +116,21 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         Fragment fragment = null;
-        Class fragmentClass;
-
+        Class fragmentClass = null;
 
         if (id == R.id.main_pg00) {
 //            Toast.makeText(context, "main_pg00", Toast.LENGTH_SHORT).show();
-/*            Intent i = new Intent(MainActivity.this, Pg00Main.class);
-            startActivity(i);*/
+//            Intent i = new Intent(MainActivity.this, Pg00Main.class);
+//            startActivity(i);
             fragmentClass = Pg00Main.class;
         } else if (id == R.id.new_prop_pg01) {
             fragmentClass = Pg01NewProp.class;
-        } else if (id == R.id.my_noti_pg02tb01) {
-/*            Intent i = new Intent(MainActivity.this, Pg02Push.class);
-            startActivity(i);*/
+        } else if (id == R.id.my_push_pg02tb01) {
+            Intent i = new Intent(MainActivity.this, Pg02Push.class);
+            startActivity(i);
+        } else if (id == R.id.my_subcribe_pg02tb04) {
             fragmentClass = Pg01NewProp.class;
-        } else if (id == R.id.my_subcribe_pg02tb02) {
-            fragmentClass = Pg01NewProp.class;
-        } else if (id == R.id.noti_setting_pg02tb03) {
+        } else if (id == R.id.noti_setting_pg02tb05) {
             fragmentClass = Pg01NewProp.class;
         } else if (id == R.id.hot_pg01) {
             fragmentClass = Pg01NewProp.class;
@@ -141,37 +153,21 @@ public class MainActivity extends AppCompatActivity
             fragmentClass = Pg00Main.class;
         }
 
-/*
+       if (fragmentClass != null) {
+           try {
+               fragment = (Fragment) fragmentClass.newInstance();
+           } catch (Exception e) {
+               e.printStackTrace();
+           }
 
-        switch(id) {
-            case R.id.main_pg00:
-                fragmentClass = Pg00Main.class;
-                break;
-            case R.id.new_prop_pg01:
-                fragmentClass = Pg02Push.class;
-                break;
-            case R.id.my_noti_pg02tb01:
-                fragmentClass = Pg02Push.class;
-                break;
-            default:
-                fragmentClass = Pg02Push.class;
-        }
-*/
-        try {
-            fragment = (Fragment) fragmentClass.newInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-        // Insert the fragment by replacing any existing fragment
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
-
+           // Insert the fragment by replacing any existing fragment
+           FragmentManager fragmentManager = getSupportFragmentManager();
+           fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+       }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
+    } //end of onCreate
 
     /*
     OptionsMenu
@@ -179,7 +175,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -198,51 +194,6 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    /*
-    Tab
-    */
-/*
-    private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new OneFragment(), "我的通知");     // OneFragment - tab content page. 我的通知 - Tab name
-        adapter.addFragment(new TwoFragment(), "全部通知");
-        adapter.addFragment(new ThreeFragment(), "重大通知");
-        adapter.addFragment(new FourFragment(), "我的訂閱");
-        adapter.addFragment(new FiveFragment(), "設定通知");
-        viewPager.setAdapter(adapter);
-    }
-*/
-
-/*
-        class ViewPagerAdapter extends FragmentPagerAdapter {
-            private final List<Fragment> mFragmentList = new ArrayList<>();
-            private final List<String> mFragmentTitleList = new ArrayList<>();
-
-            public ViewPagerAdapter(FragmentManager manager) {
-                super(manager);
-            }
-
-            @Override
-            public Fragment getItem(int position) {
-                return mFragmentList.get(position);
-            }
-
-            @Override
-            public int getCount() {
-                return mFragmentList.size();
-            }
-
-            public void addFragment(Fragment fragment, String title) {
-                mFragmentList.add(fragment);
-                mFragmentTitleList.add(title);
-            }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mFragmentTitleList.get(position);
-        }
-    }
-*/
 
     @Override
     public void onStart() {

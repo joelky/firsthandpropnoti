@@ -11,14 +11,14 @@
         <item android:title="推播通知">
             <menu>
                 <item
-                    android:id="@+id/my_noti_pg02tb01"
+                    android:id="@+id/my_push_pg02tb01"
                     android:title="     我的通知" />
                 <item
-                    android:id="@+id/my_subcribe_pg02tb02"
+                    android:id="@+id/my_subcribe_pg02tb04"
                     android:title="     我的訂閱" />
                 <item
-                    android:id="@+id/noti_setting_pg02tb03"
-                    android:title="     通知設定" />
+                    android:id="@+id/noti_setting_pg02tb05"
+                    android:title="     設定通知" />
             </menu>
         </item>
         <item

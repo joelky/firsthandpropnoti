@@ -23,28 +23,26 @@ public class Pg02Push extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pg02_push);
 
-/*        *//*
+        /*
         Tab
-        *//*
+        */
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
-
         tabLayout = (TabLayout) findViewById(R.id.tabs);
-
         //Assigns the ViewPager to TabLayout
         tabLayout.setupWithViewPager(viewPager);
     }
 
-    *//*
+    /*
     Tab
-    *//*
+    */
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new OneFragment(), "我的通知");     // OneFragment - tab content page. 我的通知 - Tab name
-        adapter.addFragment(new TwoFragment(), "全部通知");
-        adapter.addFragment(new ThreeFragment(), "重大通知");
-        adapter.addFragment(new FourFragment(), "我的訂閱");
-        adapter.addFragment(new FiveFragment(), "設定通知");
+        adapter.addFragment(new Pg02Tab01MyPush(), "我的通知");     // Pg02Tab01MyPush - tab content page. 我的通知 - Tab name
+        adapter.addFragment(new Pg02Tab02AllPush(), "全部通知");
+        adapter.addFragment(new Pg02Tab03CriticalPush(), "重大通知");
+        adapter.addFragment(new Pg02Tab04MySubs(), "我的訂閱");
+        adapter.addFragment(new Pg02Tab05NotiSetting(), "設定通知");
         viewPager.setAdapter(adapter);
     }
 
@@ -74,6 +72,7 @@ public class Pg02Push extends AppCompatActivity {
         @Override
         public CharSequence getPageTitle(int position) {
             return mFragmentTitleList.get(position);
-        }*/
+        }
     }
 }
+

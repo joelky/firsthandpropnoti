@@ -6,9 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class FiveFragment extends Fragment{
+public class Pg02Tab04MySubs extends Fragment{
 
-    public FiveFragment() {
+    public Pg02Tab04MySubs() {
         // Required empty public constructor
     }
 
@@ -21,7 +21,7 @@ public class FiveFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_five, container, false);
+        return inflater.inflate(com.a1sthandpropertiesnoti.firsthandpropnoti.R.layout.pg02tab04_mysubs, container, false);
     }
 
 }
