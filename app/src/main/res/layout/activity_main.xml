@@ -11,12 +11,6 @@
 
     <!--<include layout="@layout/pg00_main" />-->
 
-    <!-- The menu_main content view where fragments are loaded -->
-    <FrameLayout
-        android:id="@+id/flContent"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
     <!--
     Toolbar
     -->
@@ -25,8 +19,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <!-- The menu_main content view where fragments are loaded -->
+    <FrameLayout
+        android:id="@+id/flContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <!--
-    NavigationView
+    NavigationView - place inside drawer
     -->
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"

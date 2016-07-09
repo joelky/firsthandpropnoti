@@ -3,8 +3,6 @@ package com.a1sthandpropertiesnoti.firsthandpropnoti;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -44,11 +42,11 @@ public class MainActivity extends AppCompatActivity
         //getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         /*
-        Drawer Layout (left side drawer)
+        DrawerLayout (left side drawer)
         */
-        //Drawer Toggle (亖 spinning hamburger)
-        //Initializing Drawer Layout and ActionBarToggle
+        //Initializing DrawerLayout and ActionBarToggle
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        //ActionBarToggle (亖 spinning hamburger)
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
             @Override
@@ -56,22 +54,23 @@ public class MainActivity extends AppCompatActivity
                 // Code here will be triggered once the drawer closes as we dont want anything to happen so we leave this blank
                 super.onDrawerClosed(drawerView);
             }
-
             @Override
             public void onDrawerOpened(View drawerView) {
                 // Code here will be triggered once the drawer open as we dont want anything to happen so we leave this blank
-
                 super.onDrawerOpened(drawerView);
             }
         };
-        //Set the actionbarToggle to drawer layout
-        drawer.setDrawerListener(toggle);
+        //Adds the specified listener to the list of listeners that will be notified of drawer events.
+        drawer.addDrawerListener(toggle);
         //calling sync state is necessay or else your hamburger icon wont show up
         toggle.syncState();
 
-        //Navigation View (drawer) - Initialize
+        /*
+        NavigationView (drawer) - Initialize
+        */
         //Initializing NavigationView
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        //Set a listener that will be notified when a menu item is clicked
         navigationView.setNavigationItemSelectedListener(this);
 
         /*
@@ -89,17 +88,6 @@ public class MainActivity extends AppCompatActivity
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
 
-        /*
-        FloatingActionButton
-        */
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
@@ -107,7 +95,7 @@ public class MainActivity extends AppCompatActivity
     //End Of OnCreate
 
     /*
-    Navigation view - on select
+    NavigationView - on select
     */
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -128,6 +116,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.my_push_pg02tb01) {
             Intent i = new Intent(MainActivity.this, Pg02Push.class);
             startActivity(i);
+//            fragmentClass = Pg02Push.class;
         } else if (id == R.id.my_subcribe_pg02tb04) {
             fragmentClass = Pg01NewProp.class;
         } else if (id == R.id.noti_setting_pg02tb05) {
@@ -164,10 +153,13 @@ public class MainActivity extends AppCompatActivity
            FragmentManager fragmentManager = getSupportFragmentManager();
            fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
        }
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+
         return true;
-    } //end of onCreate
+    }
+    //End of onNavigationItemSelected
 
     /*
     OptionsMenu
@@ -193,7 +185,6 @@ public class MainActivity extends AppCompatActivity
 
         return super.onOptionsItemSelected(item);
     }
-
 
     @Override
     public void onStart() {

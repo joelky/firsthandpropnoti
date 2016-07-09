@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <group android:checkableBehavior="single">
-        <item
+     <item
             android:id="@+id/main_pg00"
             android:title="主頁" />
         <item
@@ -39,8 +37,6 @@
         <item
             android:id="@+id/about_pg50"
             android:title="關於我們" />
-    </group>
-
     <item android:title="Communicate">
         <menu>
             <item
@@ -53,5 +49,4 @@
                 android:title="Send" />
         </menu>
     </item>
-
 </menu>
