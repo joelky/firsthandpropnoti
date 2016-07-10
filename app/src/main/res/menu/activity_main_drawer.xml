@@ -1,52 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-     <item
-            android:id="@+id/main_pg00"
+        <item
+            android:id="@+id/Pg00Main"
             android:title="主頁" />
         <item
-            android:id="@+id/new_prop_pg01"
+            android:id="@+id/Pg01NewProp"
             android:title="一手新盤" />
         <item android:title="推播通知">
             <menu>
                 <item
-                    android:id="@+id/my_push_pg02tb01"
+                    android:id="@+id/Pg02Tb01MyPush"
                     android:title="     我的通知" />
                 <item
-                    android:id="@+id/my_subcribe_pg02tb04"
+                    android:id="@+id/Pg02Tb04MySubs"
                     android:title="     我的訂閱" />
                 <item
-                    android:id="@+id/noti_setting_pg02tb05"
+                    android:id="@+id/Pg02Tb05NotiSetting"
                     android:title="     設定通知" />
             </menu>
         </item>
+    <group
+        android:id="@+id/menu_top"
+        android:checkableBehavior="single">
         <item
-            android:id="@+id/hot_pg01"
+            android:id="@+id/Pg01Hot"
             android:title="火熱發售中!" />
         <item
-            android:id="@+id/sales_pg01"
+            android:id="@+id/Pg01Sales"
             android:title="最新優惠!" />
         <item
-            android:id="@+id/draw_pg04"
+            android:id="@+id/Pg04Draw"
             android:title="中抽籤結果公報" />
         <item
-            android:id="@+id/tools_pg60"
+            android:id="@+id/Pg60Tools"
             android:title="計算工具" />
+    </group>
         <item
-            android:id="@+id/settings_pr"
+            android:id="@+id/PrSetting"
             android:title="設定" />
         <item
-            android:id="@+id/about_pg50"
+            android:id="@+id/Pg50About"
             android:title="關於我們" />
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
-        </menu>
-    </item>
+         <item android:title="Communicate">
+            <menu>
+                <item
+                    android:id="@+id/nav_share"
+                    android:icon="@drawable/ic_menu_share"
+                    android:title="Share" />
+                <item
+                    android:id="@+id/nav_send"
+                    android:icon="@drawable/ic_menu_send"
+                    android:title="Send" />
+            </menu>
+        </item>
 </menu>

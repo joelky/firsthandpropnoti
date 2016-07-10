@@ -8,11 +8,12 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Pg02Push extends AppCompatActivity {
+public class Pg02Push extends BaseActivity {
 
     private Toolbar toolbar;
     private TabLayout tabLayout;
@@ -32,7 +33,19 @@ public class Pg02Push extends AppCompatActivity {
         //Assigns the ViewPager to TabLayout
         tabLayout.setupWithViewPager(viewPager);
     }
+    @Override
+    protected String setTitleOnToolbar() {
+        return "推播通知";
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
 
+        switch (item.getItemId()) {
+            case R.id.Pg02Tb01MyPush:
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
     /*
     Tab
     */

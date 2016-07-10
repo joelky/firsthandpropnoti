@@ -12,31 +12,23 @@ import android.view.ViewGroup;
  * Created by joelau on 27/6/16.
  */
 
-public class Pg01NewProp extends BaseActivity {
+public class Pg60Tools extends BaseActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.pg01_new_prop);
+        setContentView(R.layout.pg60_tools);
     }
     @Override
     protected String setTitleOnToolbar(){
-        return "一手新盤";
+        return "計算工具";
     }
-    /*
-    OptionsMenu and seach icon
-    */
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
-            case R.id.Pg01NewProp:
+            case R.id.Pg60Tools:
                 return true;
         }
         return super.onOptionsItemSelected(item);
