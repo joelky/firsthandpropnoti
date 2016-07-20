@@ -1,4 +1,4 @@
-package com.a1sthandpropertiesnoti.firsthandpropnoti.adater;
+package com.a1sthandpropertiesnoti.firsthandpropnoti.adapter;
 
         import com.a1sthandpropertiesnoti.firsthandpropnoti.R;
         import com.a1sthandpropertiesnoti.firsthandpropnoti.app.AppController;

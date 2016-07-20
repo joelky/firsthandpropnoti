@@ -7,7 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 
-import com.a1sthandpropertiesnoti.firsthandpropnoti.adater.CustomListAdapter;
+import com.a1sthandpropertiesnoti.firsthandpropnoti.adapter.CustomListAdapter;
 import com.a1sthandpropertiesnoti.firsthandpropnoti.app.AppController;
 import com.a1sthandpropertiesnoti.firsthandpropnoti.model.Movie;
 import com.android.volley.Response;
