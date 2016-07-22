@@ -5,12 +5,10 @@
     android:layout_height="match_parent"
     tools:context="com.a1sthandpropertiesnoti.firsthandpropnoti.Pg01NewProp">
 
-    <ListView
-        android:id="@+id/list"
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview1"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:divider="@color/list_divider"
-        android:dividerHeight="1dp"
-        android:listSelector="@drawable/list_row_selector" />
+        android:layout_height="fill_parent" />
 
 </RelativeLayout>

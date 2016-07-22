@@ -1,149 +1,108 @@
 package com.a1sthandpropertiesnoti.firsthandpropnoti;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.ListView;
-
-import com.a1sthandpropertiesnoti.firsthandpropnoti.adapter.CustomListAdapter;
-import com.a1sthandpropertiesnoti.firsthandpropnoti.app.AppController;
-import com.a1sthandpropertiesnoti.firsthandpropnoti.model.Movie;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.JsonArrayRequest;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
-
-/**
- * Created by joelau on 27/6/16.
- */
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import com.a1sthandpropertiesnoti.firsthandpropnoti.adapter.GetDataAdapter;
+import com.a1sthandpropertiesnoti.firsthandpropnoti.adapter.RecyclerViewAdapter;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 
 public class Pg01NewProp extends BaseActivity {
 
-    // Log tag
-    private static final String TAG = MainActivity.class.getSimpleName();
+    List<GetDataAdapter> GetDataAdapter1;
 
-    // Movies json url
-    private static final String url = "http://api.androidhive.info/json/movies.json";
-    private ProgressDialog pDialog;
-    private List<Movie> movieList = new ArrayList<Movie>();
-    private ListView listView;
-    private CustomListAdapter adapter;
+    RecyclerView recyclerView;
+
+    RecyclerView.LayoutManager recyclerViewlayoutManager;
+
+    RecyclerView.Adapter recyclerViewadapter;
+    String GET_JSON_DATA_HTTP_URL = "http://130.211.250.30/ImageJsonData.php";
+//    String GET_JSON_DATA_HTTP_URL = "http://androidblog.esy.es/ImageJsonData.php";
+    String JSON_IMAGE_TITLE_NAME = "ppty_name"; //image_title
+    String JSON_IMAGE_URL = "image_path";       //image_url
+
+    JsonArrayRequest jsonArrayRequest ;
+
+    RequestQueue requestQueue ;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.pg01_new_prop);
 
-        listView = (ListView) findViewById(R.id.list);
-        adapter = new CustomListAdapter(this, movieList);
-        listView.setAdapter(adapter);
+        GetDataAdapter1 = new ArrayList<>();
 
-        pDialog = new ProgressDialog(this);
-        // Showing progress dialog before making http request
-        pDialog.setMessage("Loading...");
-        pDialog.show();
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerview1);
 
-        // changing action bar color
-//        getActionBar().setBackgroundDrawable(
-//                new ColorDrawable(Color.parseColor("#1b1b1b")));
+        recyclerView.setHasFixedSize(true);
 
-        // Creating volley request obj
-        JsonArrayRequest movieReq = new JsonArrayRequest(url,
+        recyclerViewlayoutManager = new LinearLayoutManager(this);
+
+        recyclerView.setLayoutManager(recyclerViewlayoutManager);
+
+
+        JSON_DATA_WEB_CALL();
+
+
+    }
+
+    public void JSON_DATA_WEB_CALL(){
+
+        jsonArrayRequest = new JsonArrayRequest(GET_JSON_DATA_HTTP_URL,
+
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.d(TAG, response.toString());
-                        hidePDialog();
 
-                        // Parsing json
-                        for (int i = 0; i < response.length(); i++) {
-                            try {
-
-                                JSONObject obj = response.getJSONObject(i);
-                                Movie movie = new Movie();
-                                movie.setPropertyNameChi(obj.getString("title"));
-                                movie.setThumbnailUrl(obj.getString("image"));
-                                movie.setPropertyNameEng(((Number) obj.get("rating"))
-                                        .doubleValue());
-                                movie.setYear(obj.getInt("releaseYear"));
-
-                                // Genre is json array
-                                JSONArray genreArry = obj.getJSONArray("genre");
-                                ArrayList<String> genre = new ArrayList<String>();
-                                for (int j = 0; j < genreArry.length(); j++) {
-                                    genre.add((String) genreArry.get(j));
-                                }
-                                movie.setGenre(genre);
-
-                                // adding movie to movies array
-                                movieList.add(movie);
-
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-
-                        }
-
-                        // notifying list adapter about data changes
-                        // so that it renders the list view with updated data
-                        adapter.notifyDataSetChanged();
+                        JSON_PARSE_DATA_AFTER_WEBCALL(response);
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.d(TAG, "Error: " + error.getMessage());
-                hidePDialog();
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
 
+                    }
+                });
+
+        requestQueue = Volley.newRequestQueue(this);
+
+        requestQueue.add(jsonArrayRequest);
+    }
+
+    public void JSON_PARSE_DATA_AFTER_WEBCALL(JSONArray array){
+
+        for(int i = 0; i<array.length(); i++) {
+
+            GetDataAdapter GetDataAdapter2 = new GetDataAdapter();
+
+            JSONObject json = null;
+            try {
+
+                json = array.getJSONObject(i);
+
+                GetDataAdapter2.setImageTitleNamee(json.getString(JSON_IMAGE_TITLE_NAME));
+
+                GetDataAdapter2.setImageServerUrl(json.getString(JSON_IMAGE_URL));
+
+            } catch (JSONException e) {
+
+                e.printStackTrace();
             }
-        });
-
-        // Adding request to request queue
-        AppController.getInstance().addToRequestQueue(movieReq);
-    }
-    @Override
-    protected String setTitleOnToolbar(){
-        return "一手新盤";
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        hidePDialog();
-    }
-
-    private void hidePDialog() {
-        if (pDialog != null) {
-            pDialog.dismiss();
-            pDialog = null;
+            GetDataAdapter1.add(GetDataAdapter2);
         }
-    }
 
+        recyclerViewadapter = new RecyclerViewAdapter(GetDataAdapter1, this);
 
-    /*
-    OptionsMenu and seach icon
-    */
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()) {
-            case R.id.Pg01NewProp:
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
+        recyclerView.setAdapter(recyclerViewadapter);
     }
 }
