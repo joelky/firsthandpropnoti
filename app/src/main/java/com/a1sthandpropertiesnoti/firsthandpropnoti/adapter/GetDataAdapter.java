@@ -2,23 +2,40 @@ package com.a1sthandpropertiesnoti.firsthandpropnoti.adapter;
 
 public class GetDataAdapter {
 
-    public String ImageServerUrl;
-    public String ImageTitleName;
+    public String imageUrlNewPropertySmall;
+    public String newPropertyNameChi;
+    public String newPropertyNameEng;
+    public String newPropertyAddress;
 
-    public String getImageServerUrl() {
-        return ImageServerUrl;
+    public String getImageUrlNewPropertySmall() {
+        return imageUrlNewPropertySmall;
     }
 
-    public void setImageServerUrl(String imageServerUrl) {
-        this.ImageServerUrl = imageServerUrl;
+    public String getNewPropertyNameEng() {
+        return newPropertyNameEng;
     }
 
-    public String getImageTitleName() {
-        return ImageTitleName;
+    public void setNewPropertyNameEng(String newPropertyNameEng) {
+        this.newPropertyNameEng = newPropertyNameEng;
     }
 
-    public void setImageTitleNamee(String Imagetitlename) {
-        this.ImageTitleName = Imagetitlename;
+    public void setImageUrlNewPropertySmall(String imageUrlNewPropertySmall) {
+        this.imageUrlNewPropertySmall = imageUrlNewPropertySmall;
     }
 
+    public String getNewPropertyNameChi() {
+        return newPropertyNameChi;
+    }
+
+    public void setNewPropertyNameChi(String newPropertyNameChi) {
+        this.newPropertyNameChi = newPropertyNameChi;
+    }
+
+    public String getNewPropertyAddress() {
+        return newPropertyAddress;
+    }
+
+    public void setNewPropertyAddress(String newPropertyAddress) {
+        this.newPropertyAddress = newPropertyAddress;
+    }
 }

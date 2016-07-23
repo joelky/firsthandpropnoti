@@ -48,17 +48,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         imageLoader1 = ServerImageParseAdapter.getInstance(context).getImageLoader();
 
-        imageLoader1.get(getDataAdapter1.getImageServerUrl(),
+        imageLoader1.get(getDataAdapter1.getImageUrlNewPropertySmall(),
                 ImageLoader.getImageListener(
-                        Viewholder.networkImageView,//Server Image
+                        Viewholder.ImageUrlNewPropertySmallNetworkImageView,//Server Image
                         R.mipmap.ic_launcher,//Before loading server image the default showing image.
                         android.R.drawable.ic_dialog_alert //Error image if requested image dose not found on server.
                 )
         );
 
-        Viewholder.networkImageView.setImageUrl(getDataAdapter1.getImageServerUrl(), imageLoader1);
-
-        Viewholder.ImageTitleNameView.setText(getDataAdapter1.getImageTitleName());
+        Viewholder.ImageUrlNewPropertySmallNetworkImageView.setImageUrl(getDataAdapter1.getImageUrlNewPropertySmall(), imageLoader1);
+        Viewholder.newPropertyNameChiView.setText(getDataAdapter1.getNewPropertyNameChi());
+        Viewholder.newPropertyNameEngView.setText(getDataAdapter1.getNewPropertyNameEng());
+        Viewholder.newPropertyAddressView.setText(getDataAdapter1.getNewPropertyAddress());
 
     }
 
@@ -70,16 +71,20 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
-        public TextView ImageTitleNameView;
-        public NetworkImageView networkImageView ;
+        public TextView newPropertyNameChiView;
+        public TextView newPropertyNameEngView;
+        public TextView newPropertyAddressView;
+        public NetworkImageView ImageUrlNewPropertySmallNetworkImageView;
 
         public ViewHolder(View itemView) {
 
             super(itemView);
 
-            ImageTitleNameView = (TextView) itemView.findViewById(R.id.textView_item) ;
+            newPropertyNameChiView = (TextView) itemView.findViewById(R.id.new_ppt_name_chi_view) ;
+            newPropertyNameEngView = (TextView) itemView.findViewById(R.id.new_ppt_name_eng_view) ;
+            newPropertyAddressView = (TextView) itemView.findViewById(R.id.new_ppt_addr_view) ;
 
-            networkImageView = (NetworkImageView) itemView.findViewById(R.id.VollyNetworkImageView1) ;
+            ImageUrlNewPropertySmallNetworkImageView = (NetworkImageView) itemView.findViewById(R.id.img_url_new_ppty_small_NetworkImageView) ;
 
         }
     }

@@ -18,7 +18,7 @@ import com.android.volley.toolbox.Volley;
 
 public class Pg01NewProp extends BaseActivity {
 
-    List<GetDataAdapter> GetDataAdapter1;
+    List<GetDataAdapter> getDataAdapterToRecyclerView;
 
     RecyclerView recyclerView;
 
@@ -27,8 +27,11 @@ public class Pg01NewProp extends BaseActivity {
     RecyclerView.Adapter recyclerViewadapter;
     String GET_JSON_DATA_HTTP_URL = "http://130.211.250.30/ImageJsonData.php";
 //    String GET_JSON_DATA_HTTP_URL = "http://androidblog.esy.es/ImageJsonData.php";
-    String JSON_IMAGE_TITLE_NAME = "ppty_name"; //image_title
-    String JSON_IMAGE_URL = "image_path";       //image_url
+    //DB columns name
+    String JSON_IMAGE_URL_SMALL   = "img_path_small";
+    String JSON_PROPERTY_NAME_CHI = "ppty_name_chi";
+    String JSON_PROPERTY_NAME_ENG = "ppty_name_eng";
+    String JSON_PROPERTY_ADDRESS  = "ppty_addr";
 
     JsonArrayRequest jsonArrayRequest ;
 
@@ -40,7 +43,7 @@ public class Pg01NewProp extends BaseActivity {
 
         setContentView(R.layout.pg01_new_prop);
 
-        GetDataAdapter1 = new ArrayList<>();
+        getDataAdapterToRecyclerView = new ArrayList<>();
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview1);
 
@@ -50,10 +53,7 @@ public class Pg01NewProp extends BaseActivity {
 
         recyclerView.setLayoutManager(recyclerViewlayoutManager);
 
-
         JSON_DATA_WEB_CALL();
-
-
     }
 
     public void JSON_DATA_WEB_CALL(){
@@ -83,25 +83,27 @@ public class Pg01NewProp extends BaseActivity {
 
         for(int i = 0; i<array.length(); i++) {
 
-            GetDataAdapter GetDataAdapter2 = new GetDataAdapter();
+            GetDataAdapter GetDataAdapterFromJson = new GetDataAdapter();
 
             JSONObject json = null;
             try {
 
                 json = array.getJSONObject(i);
 
-                GetDataAdapter2.setImageTitleNamee(json.getString(JSON_IMAGE_TITLE_NAME));
-
-                GetDataAdapter2.setImageServerUrl(json.getString(JSON_IMAGE_URL));
+//                GetDataAdapterFromJson.setNewPropertyNameChi(URLDecoder.decode(json.getString(JSON_PROPERTY_NAME_CHI), "UTF-8"));
+                GetDataAdapterFromJson.setImageUrlNewPropertySmall(json.getString(JSON_IMAGE_URL_SMALL));
+                GetDataAdapterFromJson.setNewPropertyNameChi(json.getString(JSON_PROPERTY_NAME_CHI));
+                GetDataAdapterFromJson.setNewPropertyNameEng(json.getString(JSON_PROPERTY_NAME_ENG));
+                GetDataAdapterFromJson.setNewPropertyAddress(json.getString(JSON_PROPERTY_ADDRESS));
 
             } catch (JSONException e) {
 
                 e.printStackTrace();
             }
-            GetDataAdapter1.add(GetDataAdapter2);
+            getDataAdapterToRecyclerView.add(GetDataAdapterFromJson);
         }
 
-        recyclerViewadapter = new RecyclerViewAdapter(GetDataAdapter1, this);
+        recyclerViewadapter = new RecyclerViewAdapter(getDataAdapterToRecyclerView, this);
 
         recyclerView.setAdapter(recyclerViewadapter);
     }
