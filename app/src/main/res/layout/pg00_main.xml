@@ -3,9 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.a1sthandpropertiesnoti.firsthandpropnoti.Pg00Main">
+    tools:context="com.fcm.firsthandpptynoti.Pg00Main">
 
     <TextView
+        android:id="@+id/main_page_tmp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/pg00"
@@ -13,4 +14,27 @@
         android:textStyle="bold"
         android:layout_centerInParent="true"/>
 
+    <TextView
+        android:id="@+id/informationTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/quickstart_message"
+        android:layout_below="@+id/main_page_tmp"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/subscribeButton"
+        android:layout_width="@dimen/standard_field_width"
+        android:layout_height="wrap_content"
+        android:text="@string/subscribe_to_news"
+        android:layout_below="@+id/informationTextView"
+        android:layout_toStartOf="@+id/main_page_tmp" />
+
+    <Button
+        android:id="@+id/logTokenButton"
+        android:layout_width="@dimen/standard_field_width"
+        android:layout_height="wrap_content"
+        android:text="@string/log_token"
+        android:layout_alignTop="@+id/subscribeButton"
+        android:layout_toEndOf="@+id/main_page_tmp" />
 </RelativeLayout>

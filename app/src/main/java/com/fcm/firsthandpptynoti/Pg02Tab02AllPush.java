@@ -1,4 +1,4 @@
-package com.a1sthandpropertiesnoti.firsthandpropnoti;
+package com.fcm.firsthandpptynoti;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -6,9 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class Pg02Tab03CriticalPush extends Fragment{
+public class Pg02Tab02AllPush extends Fragment{
 
-    public Pg02Tab03CriticalPush() {
+    public Pg02Tab02AllPush() {
         // Required empty public constructor
     }
 
@@ -21,7 +21,7 @@ public class Pg02Tab03CriticalPush extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(com.a1sthandpropertiesnoti.firsthandpropnoti.R.layout.pg02tab03_criticalpush, container, false);
+        return inflater.inflate(com.fcm.firsthandpptynoti.R.layout.pg02tab02_allpush, container, false);
     }
 
 }

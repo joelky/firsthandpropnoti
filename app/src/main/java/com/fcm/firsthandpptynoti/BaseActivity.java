@@ -1,4 +1,4 @@
-package com.a1sthandpropertiesnoti.firsthandpropnoti;
+package com.fcm.firsthandpptynoti;
 
 import android.content.Intent;
 import android.support.annotation.LayoutRes;
@@ -11,7 +11,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.Switch;
 
 /**
  * Created by joelau on 10/7/16.

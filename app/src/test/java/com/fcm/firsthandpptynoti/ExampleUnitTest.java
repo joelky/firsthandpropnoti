@@ -1,4 +1,4 @@
-package com.a1sthandpropertiesnoti.firsthandpropnoti;
+package com.fcm.firsthandpptynoti;
 
 import org.junit.Test;
 

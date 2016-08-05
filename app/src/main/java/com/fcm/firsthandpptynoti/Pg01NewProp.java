@@ -1,4 +1,4 @@
-package com.a1sthandpropertiesnoti.firsthandpropnoti;
+package com.fcm.firsthandpptynoti;
 
 import android.os.Bundle;
 import org.json.JSONArray;
@@ -8,8 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import com.a1sthandpropertiesnoti.firsthandpropnoti.adapter.GetDataAdapter;
-import com.a1sthandpropertiesnoti.firsthandpropnoti.adapter.RecyclerViewAdapter;
+
+import com.fcm.firsthandpptynoti.adapter.GetDataAdapter;
+import com.fcm.firsthandpptynoti.adapter.RecyclerViewAdapter;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -18,14 +19,13 @@ import com.android.volley.toolbox.Volley;
 
 public class Pg01NewProp extends BaseActivity {
 
-    List<GetDataAdapter> getDataAdapterToRecyclerView;
-
+    private static final String TAG = "Pg01NewProp";
+    List<GetDataAdapter> getDataAdapterToRecyclerViewList;
     RecyclerView recyclerView;
+    RecyclerView.LayoutManager recyclerViewLayoutManager;
+    RecyclerView.Adapter recyclerViewAdapter;
 
-    RecyclerView.LayoutManager recyclerViewlayoutManager;
-
-    RecyclerView.Adapter recyclerViewadapter;
-    String GET_JSON_DATA_HTTP_URL = "http://130.211.250.30/ImageJsonData.php";
+    String GET_JSON_DATA_HTTP_URL = "http://104.155.237.246//ImageJsonData.php";
 //    String GET_JSON_DATA_HTTP_URL = "http://androidblog.esy.es/ImageJsonData.php";
     //DB columns name
     String JSON_IMAGE_URL_SMALL   = "img_path_small";
@@ -43,18 +43,24 @@ public class Pg01NewProp extends BaseActivity {
 
         setContentView(R.layout.pg01_new_prop);
 
-        getDataAdapterToRecyclerView = new ArrayList<>();
+        getDataAdapterToRecyclerViewList = new ArrayList<>();
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview1);
 
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
         recyclerView.setHasFixedSize(true);
 
-        recyclerViewlayoutManager = new LinearLayoutManager(this);
+        // use a linear layout manager
+        recyclerViewLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(recyclerViewLayoutManager);
 
-        recyclerView.setLayoutManager(recyclerViewlayoutManager);
-
+        // 1. get reponse from JSON by volley
+        // 2. set values from list to adapter
+        // 3. set adapter values recycler view
         JSON_DATA_WEB_CALL();
-    }
+
+    }   //End of onCreate
 
     public void JSON_DATA_WEB_CALL(){
 
@@ -100,11 +106,38 @@ public class Pg01NewProp extends BaseActivity {
 
                 e.printStackTrace();
             }
-            getDataAdapterToRecyclerView.add(GetDataAdapterFromJson);
+            getDataAdapterToRecyclerViewList.add(GetDataAdapterFromJson);
         }
 
-        recyclerViewadapter = new RecyclerViewAdapter(getDataAdapterToRecyclerView, this);
-
-        recyclerView.setAdapter(recyclerViewadapter);
+        // specify an adapter
+        recyclerViewAdapter = new RecyclerViewAdapter(getDataAdapterToRecyclerViewList, this);
+        recyclerView.setAdapter(recyclerViewAdapter);
     }
+/*
+
+    */
+/*
+    Button
+    *//*
+
+    Button subscribeButton = (Button) findViewById(R.id.subscribeButton);
+    subscribeButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            // [START subscribe_topics]
+            FirebaseMessaging.getInstance().subscribeToTopic("news");
+            Log.d(TAG, "Subscribed to news topic");
+            // [END subscribe_topics]
+        }
+    });
+
+    Button logTokenButton = (Button) findViewById(R.id.logTokenButton);
+    logTokenButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Log.d(TAG, "InstanceID token: " + FirebaseInstanceId.getInstance().getToken());
+        }
+    });
+*/
+
 }

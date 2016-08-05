@@ -1,4 +1,4 @@
-package com.a1sthandpropertiesnoti.firsthandpropnoti;
+package com.fcm.firsthandpptynoti;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

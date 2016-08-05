@@ -1,4 +1,4 @@
-package com.a1sthandpropertiesnoti.firsthandpropnoti.adapter;
+package com.fcm.firsthandpptynoti.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,15 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.a1sthandpropertiesnoti.firsthandpropnoti.R;
+import com.fcm.firsthandpptynoti.R;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 
 import java.util.List;
 
-/**
- * Created by JUNED on 6/16/2016.
- */
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
     Context context;
@@ -24,6 +21,32 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     ImageLoader imageLoader1;
 
+    // Sub-class
+    // Provide a reference to the views for each data item
+    // Complex data items may need more than one view per item, and
+    // you provide access to all the views for a data item in a view holder
+    class ViewHolder extends RecyclerView.ViewHolder{
+
+        public TextView newPropertyNameChiView;
+        public TextView newPropertyNameEngView;
+        public TextView newPropertyAddressView;
+        public NetworkImageView ImageUrlNewPropertySmallNetworkImageView;
+
+        //constructor
+        public ViewHolder(View itemView) {
+
+            super(itemView);
+
+            newPropertyNameChiView = (TextView) itemView.findViewById(R.id.new_ppt_name_chi_view) ;
+            newPropertyNameEngView = (TextView) itemView.findViewById(R.id.new_ppt_name_eng_view) ;
+            newPropertyAddressView = (TextView) itemView.findViewById(R.id.new_ppt_addr_view) ;
+
+            ImageUrlNewPropertySmallNetworkImageView = (NetworkImageView) itemView.findViewById(R.id.img_url_new_ppty_small_NetworkImageView) ;
+
+        }
+    }
+
+    // Constructor (depends on the kind of dataset)
     public RecyclerViewAdapter(List<GetDataAdapter> getDataAdapter, Context context){
 
         super();
@@ -31,6 +54,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         this.context = context;
     }
 
+    // Create new views (invoked by the layout manager)
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
@@ -41,6 +65,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return viewHolder;
     }
 
+    // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder Viewholder, int position) {
 
@@ -67,25 +92,5 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public int getItemCount() {
 
         return getDataAdapter.size();
-    }
-
-    class ViewHolder extends RecyclerView.ViewHolder{
-
-        public TextView newPropertyNameChiView;
-        public TextView newPropertyNameEngView;
-        public TextView newPropertyAddressView;
-        public NetworkImageView ImageUrlNewPropertySmallNetworkImageView;
-
-        public ViewHolder(View itemView) {
-
-            super(itemView);
-
-            newPropertyNameChiView = (TextView) itemView.findViewById(R.id.new_ppt_name_chi_view) ;
-            newPropertyNameEngView = (TextView) itemView.findViewById(R.id.new_ppt_name_eng_view) ;
-            newPropertyAddressView = (TextView) itemView.findViewById(R.id.new_ppt_addr_view) ;
-
-            ImageUrlNewPropertySmallNetworkImageView = (NetworkImageView) itemView.findViewById(R.id.img_url_new_ppty_small_NetworkImageView) ;
-
-        }
     }
 }

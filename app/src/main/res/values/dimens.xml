@@ -18,4 +18,7 @@
     <dimen name="font_size_medium_20">20dip</dimen>
     <dimen name="font_size_large_22">22dip</dimen>
     <dimen name="year">12dip</dimen>
+
+    <!--Button-->
+    <dimen name="standard_field_width">100dp</dimen>
 </resources>

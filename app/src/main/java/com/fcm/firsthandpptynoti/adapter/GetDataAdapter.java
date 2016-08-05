@@ -1,4 +1,4 @@
-package com.a1sthandpropertiesnoti.firsthandpropnoti.adapter;
+package com.fcm.firsthandpptynoti.adapter;
 
 public class GetDataAdapter {
 
