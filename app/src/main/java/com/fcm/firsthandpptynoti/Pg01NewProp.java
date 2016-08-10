@@ -8,22 +8,25 @@ import java.util.ArrayList;
 import java.util.List;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Toast;
 
 import com.fcm.firsthandpptynoti.adapter.GetDataAdapter;
-import com.fcm.firsthandpptynoti.adapter.RecyclerViewAdapter;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.fcm.firsthandpptynoti.adapter.MyRecyclerViewAdapter;
 
 public class Pg01NewProp extends BaseActivity {
 
     private static final String TAG = "Pg01NewProp";
     List<GetDataAdapter> getDataAdapterToRecyclerViewList;
-    RecyclerView recyclerView;
-    RecyclerView.LayoutManager recyclerViewLayoutManager;
-    RecyclerView.Adapter recyclerViewAdapter;
+    RecyclerView mRecyclerView;
+    RecyclerView.LayoutManager mRecyclerViewLayoutManager;
+    MyRecyclerViewAdapter mRecyclerViewAdapter;
+    private String[] data= new String[] {"aa","bb", "aa","bb", "aa","bb", "aa","bb", "aa","bb","aa","bb", "aa","bb", "aa","bb", "aa","bb", "aa","bb"  };
 
     String GET_JSON_DATA_HTTP_URL = "http://104.155.237.246//ImageJsonData.php";
 //    String GET_JSON_DATA_HTTP_URL = "http://androidblog.esy.es/ImageJsonData.php";
@@ -45,15 +48,15 @@ public class Pg01NewProp extends BaseActivity {
 
         getDataAdapterToRecyclerViewList = new ArrayList<>();
 
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerview1);
+        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview1);
 
-        // use this setting to improve performance if you know that changes
+        // use fixed size item to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
-        recyclerView.setHasFixedSize(true);
+        mRecyclerView.setHasFixedSize(true);
 
         // use a linear layout manager
-        recyclerViewLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(recyclerViewLayoutManager);
+        mRecyclerViewLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mRecyclerViewLayoutManager);
 
         // 1. get reponse from JSON by volley
         // 2. set values from list to adapter
@@ -110,8 +113,15 @@ public class Pg01NewProp extends BaseActivity {
         }
 
         // specify an adapter
-        recyclerViewAdapter = new RecyclerViewAdapter(getDataAdapterToRecyclerViewList, this);
-        recyclerView.setAdapter(recyclerViewAdapter);
+        mRecyclerViewAdapter = new MyRecyclerViewAdapter(getDataAdapterToRecyclerViewList, this);
+        mRecyclerView.setAdapter(mRecyclerViewAdapter);
+
+        mRecyclerViewAdapter.setOnItemClickListener(new MyRecyclerViewAdapter.OnRecyclerViewItemClickListener(){
+            @Override
+            public void onItemClick(View view , List<GetDataAdapter> getDataAdapterToRecyclerViewList){
+                //Toast.makeText(Pg01NewProp.this, 'C', Toast.LENGTH_LONG).show();
+            }
+        });
     }
 /*
 

@@ -11,9 +11,6 @@ package com.fcm.firsthandpptynoti.adapter;
         import com.android.volley.toolbox.BasicNetwork;
         import com.android.volley.toolbox.DiskBasedCache;
 
-/**
- * Created by JUNED on 6/20/2016.
- */
 public class ServerImageParseAdapter {
 
     public static ServerImageParseAdapter SIAdapter;
