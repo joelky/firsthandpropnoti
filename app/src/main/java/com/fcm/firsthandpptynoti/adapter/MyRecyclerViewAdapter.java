@@ -71,6 +71,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
         //将创建的View注册点击事件
         v.setOnClickListener(this);
+
         return viewHolder;
     }
 
@@ -105,14 +106,14 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     //define interface
     public static interface OnRecyclerViewItemClickListener {
-        void onItemClick(View view , List<GetDataAdapter> data);
+        void onItemClick(View view , GetDataAdapter singleViewData);
     }
 
     @Override
     public void onClick(View v) {
         if (mOnItemClickListener != null) {
             //注意这里使用getTag方法获取数据
-            mOnItemClickListener.onItemClick(v,(List<GetDataAdapter>)v.getTag());
+            mOnItemClickListener.onItemClick(v,(GetDataAdapter)v.getTag());
         }
     }
 

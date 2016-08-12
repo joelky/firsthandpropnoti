@@ -118,8 +118,8 @@ public class Pg01NewProp extends BaseActivity {
 
         mRecyclerViewAdapter.setOnItemClickListener(new MyRecyclerViewAdapter.OnRecyclerViewItemClickListener(){
             @Override
-            public void onItemClick(View view , List<GetDataAdapter> getDataAdapterToRecyclerViewList){
-                //Toast.makeText(Pg01NewProp.this, 'C', Toast.LENGTH_LONG).show();
+            public void onItemClick(View view , GetDataAdapter singleViewData){
+                Toast.makeText(Pg01NewProp.this, singleViewData.getNewPropertyNameEng(), Toast.LENGTH_LONG).show();
             }
         });
     }
