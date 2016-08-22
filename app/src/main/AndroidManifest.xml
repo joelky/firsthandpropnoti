@@ -3,17 +3,19 @@
     package="com.fcm.firsthandpptynoti">
 
     <!-- Application Permissions -->
-        <uses-permission android:name="android.permission.INTERNET" />
-        <!--Permission if the application needs to keep the processor from sleeping when a message is received-->
-        <uses-permission android:name="android.permission.WAKE_LOCK" />
-        <!--GCM feature is critical to the Android application's function. This ensures that the Android application cannot be installed in an environment in which it could not run properly.-->
-        <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="17"/>
-<!--
-        &lt;!&ndash;permission to prevent other Android applications from registering and receiving the Android application's messages&ndash;&gt;
-        <permission android:name="com.fcm.firsthandpptynoti.permission.C2D_MESSAGE"
-            android:protectionLevel="signature" />
-        <uses-permission android:name="com.fcm.firsthandpptynoti.permission.C2D_MESSAGE" />
--->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!--Permission if the application needs to keep the processor from sleeping when a message is received-->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!--GCM feature is critical to the Android application's function. This ensures that the Android application cannot be installed in an environment in which it could not run properly.-->
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="17" />
+    <!--
+            &lt;!&ndash;permission to prevent other Android applications from registering and receiving the Android application's messages&ndash;&gt;
+            <permission android:name="com.fcm.firsthandpptynoti.permission.C2D_MESSAGE"
+                android:protectionLevel="signature" />
+            <uses-permission android:name="com.fcm.firsthandpptynoti.permission.C2D_MESSAGE" />
+    -->
 
     <application
         android:allowBackup="true"
@@ -23,29 +25,40 @@
         android:theme="@style/AppTheme">
 
         <!--Activity-->
-            <activity
-                android:name="com.fcm.firsthandpptynoti.MainActivity"
-                android:label="@string/app_name"
-                android:theme="@style/AppTheme.NoActionBar">
-                <intent-filter>
-                    <action android:name="android.intent.action.MAIN" />
-                    <category android:name="android.intent.category.LAUNCHER" />
-                </intent-filter>
-            </activity>
-            <activity android:name="com.fcm.firsthandpptynoti.Pg00Main"/>
-            <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-         App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
-            <activity android:name="com.fcm.firsthandpptynoti.Pg01NewProp"
-                android:theme="@style/AppTheme.NoActionBar"/>
-            <activity android:name="com.fcm.firsthandpptynoti.Pg02Push"
-                android:theme="@style/AppTheme.NoActionBar"/>
-            <activity android:name="com.fcm.firsthandpptynoti.Pg04Draw"
-                android:theme="@style/AppTheme.NoActionBar"/>
-            <activity android:name="com.fcm.firsthandpptynoti.Pg60Tools"
-                android:theme="@style/AppTheme.NoActionBar"/>
-            <meta-data
-                android:name="com.google.android.gms.version"
-                android:value="@integer/google_play_services_version" />
+        <activity
+            android:name="com.fcm.firsthandpptynoti.MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.fcm.firsthandpptynoti.Pg00Main" />
+        <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <activity
+            android:name="com.fcm.firsthandpptynoti.Pg01NewProp"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.fcm.firsthandpptynoti.Pg02Push"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.fcm.firsthandpptynoti.Pg03NewPropDtl"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.fcm.firsthandpptynoti.Pg04Draw"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.fcm.firsthandpptynoti.Pg60Tools"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.fcm.firsthandpptynoti.PrefSetting"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
         <!--End of Activity-->
 
         <!--Obtain a registration token
@@ -55,8 +68,7 @@
         <!--[Firebase_iid_service]
             A service that extends FirebaseInstanceIdService to handle the creation, rotation, and updating of registration tokens.
             This is required for sending to specific devices or for creating device groups-->
-        <service
-            android:name="com.fcm.firsthandpptynoti.fcm.FcmInstanceIDListenerService">
+        <service android:name="com.fcm.firsthandpptynoti.fcm.FcmInstanceIDListenerService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
@@ -64,15 +76,15 @@
         <!-- [END firebase_iid_service] -->
 
 
-        <service
-            android:name="com.fcm.firsthandpptynoti.fcm.FcmListenerService">
+        <service android:name="com.fcm.firsthandpptynoti.fcm.FcmListenerService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
         <!--InstanceID ListenerService-->
         <service
-            android:name="com.fcm.firsthandpptynoti.fcm.RegistrationIntentService" android:exported="false"/>
+            android:name="com.fcm.firsthandpptynoti.fcm.RegistrationIntentService"
+            android:exported="false" />
     </application>
 </manifest>

@@ -13,15 +13,17 @@ import com.android.volley.toolbox.NetworkImageView;
 
 import java.util.List;
 
+//implements interface View.OnClickListener
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> implements View.OnClickListener{
 
     Context context;
 
     List<GetDataAdapter> getDataAdapterList;
 
-    ImageLoader imageLoader;
+    ImageLoader imageLoader;    //volley.toolbox
 
-    private OnRecyclerViewItemClickListener mOnItemClickListener = null;
+    // implement interface: View.OnClickListener
+    private OnRecyclerViewItemClickListener mOnRecyclerViewItemClickListener = null;
 
     // Sub-class
     // A ViewHolder describes an item view and metadata about its place within the RecyclerView
@@ -30,6 +32,8 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     // you provide access to all the views for a data item in a view holder
     class ViewHolder extends RecyclerView.ViewHolder{
 
+        //Displays text to the user and optionally allows them to edit it. A TextView is a complete text editor,
+        //however the basic class is configured to not allow editing; see EditText for a subclass that configures the text view for editing.
         public TextView newPropertyNameChiView;
         public TextView newPropertyNameEngView;
         public TextView newPropertyAddressView;
@@ -38,6 +42,9 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         //constructor
         public ViewHolder(View itemView) {
 
+            //explicitly call the super constructor with parameter
+            //invoke parent class RecyclerView.ViewHolder
+            //public ViewHolder(View itemView)
             super(itemView);
 
             //TextView Widget
@@ -58,18 +65,24 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         this.context = context;
     }
 
+    // This method calls onCreateViewHolder(ViewGroup, int) to create a new RecyclerView.ViewHolder and
+    // initializes some private fields to be used by RecyclerView.
     // Create new views (invoked by the layout manager)
+    // Called when RecyclerView needs a new RecyclerView.ViewHolder of the given type to represent an item.
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         // create a new view
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_items, parent, false);
 
+        // ViewHolder describes an item view and metadata about its place within the RecyclerView.
         // set the view's size, margins, paddings and layout parameters
-        // ...
+        // The new ViewHolder will be used to display items of the adapter using onBindViewHolder(ViewHolder, int, List).
+        // Since it will be re-used to display different items in the data set,
+        // it is a good idea to cache references to sub views of the View to avoid unnecessary findViewById(int) calls.
         ViewHolder viewHolder = new ViewHolder(v);
 
-        //将创建的View注册点击事件
+        // #onClick: set onclick event to created view
         v.setOnClickListener(this);
 
         return viewHolder;
@@ -100,25 +113,27 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         viewHolder.newPropertyNameEngView.setText(getDataAdapter.getNewPropertyNameEng());
         viewHolder.newPropertyAddressView.setText(getDataAdapter.getNewPropertyAddress());
 
-        //将数据保存在itemView的Tag中，以便点击时进行获取
+        // #onClick: save data in itemView's tag for data retrieve from click
         viewHolder.itemView.setTag(getDataAdapter);
     }
 
-    //define interface
+    // #onClick: Called when a view has been clicked. Implements interface View.OnClickListener
+    @Override
+    public void onClick(View v) {
+        if (mOnRecyclerViewItemClickListener != null) {
+            //use getTag to get data
+            mOnRecyclerViewItemClickListener.onItemClick(v,(GetDataAdapter)v.getTag());
+        }
+    }
+
+    // #onClick: define interface
     public static interface OnRecyclerViewItemClickListener {
         void onItemClick(View view , GetDataAdapter singleViewData);
     }
 
-    @Override
-    public void onClick(View v) {
-        if (mOnItemClickListener != null) {
-            //注意这里使用getTag方法获取数据
-            mOnItemClickListener.onItemClick(v,(GetDataAdapter)v.getTag());
-        }
-    }
-
+    // #onClick:  Revoke from outside: Pg01NewProp > onCreate
     public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
-        this.mOnItemClickListener = listener;
+        this.mOnRecyclerViewItemClickListener = listener;
     }
 
     @Override

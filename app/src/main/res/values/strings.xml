@@ -11,9 +11,10 @@
     <string name="pg02Tb03">重大通知</string>
     <string name="pg02Tb04">我的訂閱</string>
     <string name="pg02Tb05">設定通知</string>
-
+    <string name="pg03">樓盤詳情</string>
     <string name="pg04">中抽籤結果公報</string>
     <string name="pg60">計算工具</string>
+    <string name="pref">設定</string>
 
     <string name="action_search">Search</string>
 

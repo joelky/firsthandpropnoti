@@ -19,6 +19,11 @@ public class Pg02Push extends BaseActivity {
     private ViewPager viewPager;
 
     @Override
+    protected String setTitleOnToolbar() {
+        return "推播通知";
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pg02_push);
@@ -26,16 +31,14 @@ public class Pg02Push extends BaseActivity {
         /*
         Tab
         */
+        //ViewPager - Layout manager that allows the user to flip left and right through pages of data.
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         //Assigns the ViewPager to TabLayout
         tabLayout.setupWithViewPager(viewPager);
     }
-    @Override
-    protected String setTitleOnToolbar() {
-        return "推播通知";
-    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -86,5 +89,6 @@ public class Pg02Push extends BaseActivity {
             return mFragmentTitleList.get(position);
         }
     }
+
 }
 

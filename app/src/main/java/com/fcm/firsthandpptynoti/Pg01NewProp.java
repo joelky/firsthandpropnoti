@@ -1,5 +1,6 @@
 package com.fcm.firsthandpptynoti;
 
+import android.content.Intent;
 import android.os.Bundle;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -25,11 +27,10 @@ public class Pg01NewProp extends BaseActivity {
     List<GetDataAdapter> getDataAdapterToRecyclerViewList;
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mRecyclerViewLayoutManager;
-    MyRecyclerViewAdapter mRecyclerViewAdapter;
-    private String[] data= new String[] {"aa","bb", "aa","bb", "aa","bb", "aa","bb", "aa","bb","aa","bb", "aa","bb", "aa","bb", "aa","bb", "aa","bb"  };
+    MyRecyclerViewAdapter mMyRecyclerViewAdapter;
 
     String GET_JSON_DATA_HTTP_URL = "http://104.155.237.246//ImageJsonData.php";
-//    String GET_JSON_DATA_HTTP_URL = "http://androidblog.esy.es/ImageJsonData.php";
+
     //DB columns name
     String JSON_IMAGE_URL_SMALL   = "img_path_small";
     String JSON_PROPERTY_NAME_CHI = "ppty_name_chi";
@@ -41,6 +42,11 @@ public class Pg01NewProp extends BaseActivity {
     RequestQueue requestQueue ;
 
     @Override
+    protected String setTitleOnToolbar(){
+        return "一手新盤";
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -48,7 +54,7 @@ public class Pg01NewProp extends BaseActivity {
 
         getDataAdapterToRecyclerViewList = new ArrayList<>();
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview1);
+        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview);
 
         // use fixed size item to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
@@ -92,37 +98,42 @@ public class Pg01NewProp extends BaseActivity {
 
         for(int i = 0; i<array.length(); i++) {
 
-            GetDataAdapter GetDataAdapterFromJson = new GetDataAdapter();
+            GetDataAdapter getDataAdapterFromJson = new GetDataAdapter();
 
             JSONObject json = null;
             try {
 
                 json = array.getJSONObject(i);
 
-//                GetDataAdapterFromJson.setNewPropertyNameChi(URLDecoder.decode(json.getString(JSON_PROPERTY_NAME_CHI), "UTF-8"));
-                GetDataAdapterFromJson.setImageUrlNewPropertySmall(json.getString(JSON_IMAGE_URL_SMALL));
-                GetDataAdapterFromJson.setNewPropertyNameChi(json.getString(JSON_PROPERTY_NAME_CHI));
-                GetDataAdapterFromJson.setNewPropertyNameEng(json.getString(JSON_PROPERTY_NAME_ENG));
-                GetDataAdapterFromJson.setNewPropertyAddress(json.getString(JSON_PROPERTY_ADDRESS));
+//                getDataAdapterFromJson.setNewPropertyNameChi(URLDecoder.decode(json.getString(JSON_PROPERTY_NAME_CHI), "UTF-8"));
+                getDataAdapterFromJson.setImageUrlNewPropertySmall(json.getString(JSON_IMAGE_URL_SMALL));
+                getDataAdapterFromJson.setNewPropertyNameChi(json.getString(JSON_PROPERTY_NAME_CHI));
+                getDataAdapterFromJson.setNewPropertyNameEng(json.getString(JSON_PROPERTY_NAME_ENG));
+                getDataAdapterFromJson.setNewPropertyAddress(json.getString(JSON_PROPERTY_ADDRESS));
 
             } catch (JSONException e) {
 
                 e.printStackTrace();
             }
-            getDataAdapterToRecyclerViewList.add(GetDataAdapterFromJson);
+            getDataAdapterToRecyclerViewList.add(getDataAdapterFromJson);
         }
 
-        // specify an adapter
-        mRecyclerViewAdapter = new MyRecyclerViewAdapter(getDataAdapterToRecyclerViewList, this);
-        mRecyclerView.setAdapter(mRecyclerViewAdapter);
+        // Create an adapter
+        mMyRecyclerViewAdapter = new MyRecyclerViewAdapter(getDataAdapterToRecyclerViewList, this);
+        mRecyclerView.setAdapter(mMyRecyclerViewAdapter);
 
-        mRecyclerViewAdapter.setOnItemClickListener(new MyRecyclerViewAdapter.OnRecyclerViewItemClickListener(){
-            @Override
-            public void onItemClick(View view , GetDataAdapter singleViewData){
-                Toast.makeText(Pg01NewProp.this, singleViewData.getNewPropertyNameEng(), Toast.LENGTH_LONG).show();
-            }
-        });
+        // #onClick: Revoke onItemClick from adapter
+        mMyRecyclerViewAdapter.setOnItemClickListener(
+                new MyRecyclerViewAdapter.OnRecyclerViewItemClickListener(){
+                    @Override
+                    public void onItemClick(View view , GetDataAdapter singleViewData){
+                        Toast.makeText(Pg01NewProp.this, singleViewData.getNewPropertyNameEng(), Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(Pg01NewProp.this, Pg03NewPropDtl.class));
+                    }
+                }
+        );
     }
+
 /*
 
     */

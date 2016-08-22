@@ -2,21 +2,17 @@ package com.fcm.firsthandpptynoti;
 
 import android.os.Bundle;
 
-/**
- * Created by joelau on 27/6/16.
- */
-
-public class Pg60Tools extends BaseActivity {
+public class PrefSetting extends BaseActivity {
 
     @Override
     protected String setTitleOnToolbar(){
-        return "計算工具";
+        return "設定";
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.pg60_tools);
+        setContentView(R.layout.pref_setting);
     }
 
 }

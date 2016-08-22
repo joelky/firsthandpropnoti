@@ -36,7 +36,7 @@
             android:title="計算工具" />
     </group>
         <item
-            android:id="@+id/PrSetting"
+            android:id="@+id/PrefSetting"
             android:title="設定" />
         <item
             android:id="@+id/Pg50About"

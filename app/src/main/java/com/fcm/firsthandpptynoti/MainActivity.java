@@ -49,6 +49,8 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // BaseActivity.setContentView
         setContentView(R.layout.pg00_main);
 
         if(checkPlayServices()) {
@@ -96,7 +98,7 @@ public class MainActivity extends BaseActivity {
     }
 
     /*
-    OptionsMenu and seach icon
+    3 dot OptionsMenu and seach icon
     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -105,23 +107,8 @@ public class MainActivity extends BaseActivity {
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.Pg00Main) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     /*
-    Android navigation button
+    Android navigation buttons
     */
     @Override
     public void onBackPressed() {
