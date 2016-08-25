@@ -53,6 +53,9 @@ public class MainActivity extends BaseActivity {
         // BaseActivity.setContentView
         setContentView(R.layout.pg00_main);
 
+        /*
+        Check Play Service
+        */
         if(checkPlayServices()) {
             // Start IntentService to register this application with GCM.
             Intent intent = new Intent(this, RegistrationIntentService.class);

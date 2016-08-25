@@ -6,17 +6,27 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+onCreate
+    ViewPager (extend ViewGroup) - Layout manager that allows the user to flip left and right through pages of data.
+                                 You supply an implementation of a PagerAdapter to generate the pages that the view shows.
+        mViewPager = (ViewPager) findViewById(R.id.viewpager);
+    MyViewPagerAdapter extends FragmentPagerAdapter
+        new object mViewPagerAdapter
+            add fragment (my pages)
+            mViewPager.setAdapter(mViewPagerAdapter);
+    TabLayout (extends HorizontalScrollView)
+        mTabLayout = (TabLayout) findViewById(R.id.tabs);
+        mTabLayout.setupWithViewPager(mViewPager);
+*/
 public class Pg02Push extends BaseActivity {
 
-    private Toolbar toolbar;
-    private TabLayout tabLayout;
-    private ViewPager viewPager;
+    private TabLayout mTabLayout;
+    private ViewPager mViewPager;
 
     @Override
     protected String setTitleOnToolbar() {
@@ -32,51 +42,47 @@ public class Pg02Push extends BaseActivity {
         Tab
         */
         //ViewPager - Layout manager that allows the user to flip left and right through pages of data.
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
-        setupViewPager(viewPager);
-        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        mViewPager = (ViewPager) findViewById(R.id.viewpager);
+
+        //MyViewPagerAdapter
+        setupViewPager(mViewPager);
+        //...
+        //..
+        //.
+
+        mTabLayout = (TabLayout) findViewById(R.id.tabs);
         //Assigns the ViewPager to TabLayout
-        tabLayout.setupWithViewPager(viewPager);
-    }
+        //The one-stop shop for setting up this TabLayout with a ViewPager.
+        mTabLayout.setupWithViewPager(mViewPager);
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    } // End of onCreate
 
-        switch (item.getItemId()) {
-            case R.id.Pg02Tb01MyPush:
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
     /*
     Tab
     */
-    private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new Pg02Tab01MyPush(), "我的通知");     // Pg02Tab01MyPush - tab content page. 我的通知 - Tab name
-        adapter.addFragment(new Pg02Tab02AllPush(), "全部通知");
-        adapter.addFragment(new Pg02Tab03CriticalPush(), "重大通知");
-        adapter.addFragment(new Pg02Tab04MySubs(), "我的訂閱");
-        adapter.addFragment(new Pg02Tab05NotiSetting(), "設定通知");
-        viewPager.setAdapter(adapter);
+    private void setupViewPager(ViewPager mViewPager) {
+        MyViewPagerAdapter mViewPagerAdapter = new MyViewPagerAdapter(getSupportFragmentManager());
+        mViewPagerAdapter.addFragment(new Pg02Tab01MyPush(), "我的通知");     // Pg02Tab01MyPush - tab content page. 我的通知 - Tab name
+        mViewPagerAdapter.addFragment(new Pg02Tab02AllPush(), "全部通知");
+        mViewPagerAdapter.addFragment(new Pg02Tab03CriticalPush(), "重大通知");
+        mViewPagerAdapter.addFragment(new Pg02Tab04MySubs(), "我的訂閱");
+        mViewPagerAdapter.addFragment(new Pg02Tab05NotiSetting(), "設定通知");
+        mViewPager.setAdapter(mViewPagerAdapter);
     }
 
-    class ViewPagerAdapter extends FragmentPagerAdapter {
+    /*
+    FragementPagerAdapter (extend PagerAdapter)
+    Implementation of PagerAdapter that represents each page as a Fragment that is persistently kept in the fragment manager as long as the user can return to the page.
+    fragment of each page the user visits will be kept in memory, though its view hierarchy may be destroyed when not visible.
+    This can result in using a significant amount of memory since fragment instances can hold on to an arbitrary amount of state.
+    For larger sets of pages, consider FragmentStatePagerAdapter.
+    */
+    class MyViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
 
-        public ViewPagerAdapter(FragmentManager manager) {
+        public MyViewPagerAdapter(FragmentManager manager) {
             super(manager);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return mFragmentList.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return mFragmentList.size();
         }
 
         public void addFragment(Fragment fragment, String title) {
@@ -84,10 +90,24 @@ public class Pg02Push extends BaseActivity {
             mFragmentTitleList.add(title);
         }
 
+        // abstract class implementation- FragmentPagerAdapter
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
+
+        // abstract class implementation- FragmentPagerAdapter
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
         @Override
         public CharSequence getPageTitle(int position) {
             return mFragmentTitleList.get(position);
+
         }
+
     }
 
 }

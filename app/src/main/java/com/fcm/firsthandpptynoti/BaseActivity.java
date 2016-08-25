@@ -24,8 +24,26 @@ public class BaseActivity extends AppCompatActivity implements
     private Toolbar mToolbar;
     private NavigationView mNavigationView;
     private ActionBarDrawerToggle mDrawerToggle;
-    private int selectNavItemId;
+//    private int selectNavItemId;
 
+    /**
+     * Helper method that can be used by child classes to
+     * specify that they don't want a {@link Toolbar}
+     * @return true
+     */
+    protected boolean useToolbar(){
+        return true;
+    }
+    protected boolean useDrawerToggle() {
+        return true;
+    }
+    protected String setTitleOnToolbar() {
+        return "一手樓通知";
+    }
+
+    /*
+    setContentView
+    */
     @Override
     public void setContentView(@LayoutRes int layoutResID){
         /**
@@ -50,7 +68,8 @@ public class BaseActivity extends AppCompatActivity implements
         super.setContentView(mDrawerLayoutFull);
 
         /*
-        Toolbar - Set a Toolbar to replace the ActionBar.
+        Toolbar
+        Set a Toolbar to replace the ActionBar.
         Initializing Toolbar and setting it as the actionbar
         */
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -71,22 +90,12 @@ public class BaseActivity extends AppCompatActivity implements
 
         //Navigation View
         setUpNavigationView();
+        //....
+        //...
+        //..
+        //.
     }
-
-    /**
-     * Helper method that can be used by child classes to
-     * specify that they don't want a {@link Toolbar}
-     * @return true
-     */
-    protected boolean useToolbar(){
-        return true;
-    }
-    protected boolean useDrawerToggle() {
-        return true;
-    }
-    protected String setTitleOnToolbar() {
-        return "一手樓通知";
-    }
+    //End of setContentView
 
     /*
     Drawer Toggle > Navigation View
@@ -94,7 +103,9 @@ public class BaseActivity extends AppCompatActivity implements
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     protected void setUpNavigationView()
     {
-        //Set a listener that will be notified when a menu item is clicked
+        // Navigation View
+        // Navigation View > Listener
+        // Set a listener that will be notified when a menu item is clicked
         mNavigationView.setNavigationItemSelectedListener(this);
 
         // 亖 Drawer Toggle
@@ -102,6 +113,7 @@ public class BaseActivity extends AppCompatActivity implements
             mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayoutFull, mToolbar
                     , R.string.navigation_drawer_open
                     , R.string.navigation_drawer_close);
+            //Drawer Toggle > Listener
             //Adds the specified listener to the list of listeners that will be notified of drawer events.
             mDrawerLayoutFull.addDrawerListener(mDrawerToggle);
             //Synchronize the state of the drawer indicator/affordance with the linked DrawerLayout.
@@ -119,12 +131,13 @@ public class BaseActivity extends AppCompatActivity implements
      * Helper method to allow child classes to opt-out of having the
      * hamburger menu.
      * @return
+     * interface - NavigationView.OnNavigationItemSelectedListener
      */
 
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
         mDrawerLayoutFull.closeDrawer(GravityCompat.START);
-        selectNavItemId = menuItem.getItemId();
+//        selectNavItemId = menuItem.getItemId();
         return onOptionsItemSelected(menuItem);
     }
 
