@@ -15,7 +15,16 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 /**
- * Created by joelau on 10/7/16.
+ * setContentView
+ *      DrawerLayout - mDrawerLayoutFull - inflate(R.layout.activity_base, null);
+ *          FrameLayout  - activityContainer - mDrawerLayoutFull.findViewById(R.id.flContent);
+ *                       - inflate("page to load", activityContainer, true);
+ *      super.setContentView(mDrawerLayoutFull)
+ *      Toolbar - mToolbar - findViewById(R.id.toolbar);
+ *      NavigationView - mNavigationView - findViewById(R.id.nav_view);
+ *          Listener
+ *              onNavigationItemSelected > onOptionsItemSelected > page to load
+ *          Drawer Toggle
  */
 public class BaseActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener {

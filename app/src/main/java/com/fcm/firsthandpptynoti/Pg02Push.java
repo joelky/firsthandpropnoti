@@ -12,16 +12,19 @@ import java.util.List;
 
 /*
 onCreate
+    setContentView
     ViewPager (extend ViewGroup) - Layout manager that allows the user to flip left and right through pages of data.
-                                 You supply an implementation of a PagerAdapter to generate the pages that the view shows.
+                                   You supply an implementation of a PagerAdapter to generate the pages that the view shows.
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
-    MyViewPagerAdapter extends FragmentPagerAdapter
-        new object mViewPagerAdapter
+    Class MyViewPagerAdapter extends FragmentPagerAdapter
+        new MyViewPagerAdapter
             add fragment (my pages)
             mViewPager.setAdapter(mViewPagerAdapter);
     TabLayout (extends HorizontalScrollView)
         mTabLayout = (TabLayout) findViewById(R.id.tabs);
         mTabLayout.setupWithViewPager(mViewPager);
+
+    tablayout < viewpager < viewpager adapter
 */
 public class Pg02Push extends BaseActivity {
 
@@ -60,14 +63,14 @@ public class Pg02Push extends BaseActivity {
     /*
     Tab
     */
-    private void setupViewPager(ViewPager mViewPager) {
+    private void setupViewPager(ViewPager viewPager) {
         MyViewPagerAdapter mViewPagerAdapter = new MyViewPagerAdapter(getSupportFragmentManager());
         mViewPagerAdapter.addFragment(new Pg02Tab01MyPush(), "我的通知");     // Pg02Tab01MyPush - tab content page. 我的通知 - Tab name
         mViewPagerAdapter.addFragment(new Pg02Tab02AllPush(), "全部通知");
         mViewPagerAdapter.addFragment(new Pg02Tab03CriticalPush(), "重大通知");
         mViewPagerAdapter.addFragment(new Pg02Tab04MySubs(), "我的訂閱");
         mViewPagerAdapter.addFragment(new Pg02Tab05NotiSetting(), "設定通知");
-        mViewPager.setAdapter(mViewPagerAdapter);
+        viewPager.setAdapter(mViewPagerAdapter);
     }
 
     /*
