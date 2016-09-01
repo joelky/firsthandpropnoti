@@ -9,25 +9,54 @@ import java.util.ArrayList;
 import java.util.List;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.fcm.firsthandpptynoti.adapter.GetDataAdapter;
+import com.fcm.firsthandpptynoti.adapter.MyNewPptyData;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.fcm.firsthandpptynoti.adapter.MyRecyclerViewAdapter;
+import com.fcm.firsthandpptynoti.adapter.MyRecyclerViewAdapterNewPpty; //MyRecyclerViewAdapterNewPpty extends RecyclerView.Adapter
+
+/*
+onCreate
+    setContentView
+    mMyNewPptyDataToRecyclerViewList = new ArrayList<>();
+    --------------------------------------------------------------
+    mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview);
+    --------------------------------------------------------------
+    --------------------------------------------------------------
+    mRecyclerViewLayoutManager = new LinearLayoutManager(this);
+    mRecyclerView.setLayoutManager(mRecyclerViewLayoutManager);
+    --------------------------------------------------------------
+    JSON_DATA_WEB_CALL()
+        new JsonArrayRequest(GET_JSON_DATA_HTTP_URL, JSON_PARSE_DATA_AFTER_WEBCALL(response), ...)
+            JSON_PARSE_DATA_AFTER_WEBCALL(JSONArray array)
+            for each array
+               mMyNewPptyDataFromJson.setImageUrlNewPropertySmall(json.getString(JSON_IMAGE_URL_SMALL))
+               ...
+               mMyNewPptyDataToRecyclerViewList.add(mMyNewPptyDataFromJson);
+    --------------------------------------------------------------
+            //RecyclerView > RecyclerView.Adapter
+            mMyRecyclerViewAdapterNewPpty = new MyRecyclerViewAdapterNewPpty(mMyNewPptyDataToRecyclerViewList, this);
+            mRecyclerView.setAdapter(mMyRecyclerViewAdapterNewPpty);
+    --------------------------------------------------------------
+            //Item on click listener
+            mMyRecyclerViewAdapterNewPpty.setOnItemClickListener(
+
+< json data
+
+*/
 
 public class Pg01NewProp extends BaseActivity {
 
     private static final String TAG = "Pg01NewProp";
-    List<GetDataAdapter> getDataAdapterToRecyclerViewList;
+    List<MyNewPptyData> mMyNewPptyDataToRecyclerViewList;
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mRecyclerViewLayoutManager;
-    MyRecyclerViewAdapter mMyRecyclerViewAdapter;
+    MyRecyclerViewAdapterNewPpty mMyRecyclerViewAdapterNewPpty;
 
     String GET_JSON_DATA_HTTP_URL = "http://104.155.237.246//ImageJsonData.php";
 
@@ -46,13 +75,16 @@ public class Pg01NewProp extends BaseActivity {
         return "一手新盤";
     }
 
+    //----------------------------
+    // onCreate
+    //----------------------------
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.pg01_new_prop);
 
-        getDataAdapterToRecyclerViewList = new ArrayList<>();
+        mMyNewPptyDataToRecyclerViewList = new ArrayList<>();
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview);
 
@@ -60,13 +92,21 @@ public class Pg01NewProp extends BaseActivity {
         // in content do not change the layout size of the RecyclerView
         mRecyclerView.setHasFixedSize(true);
 
-        // use a linear layout manager
+        //------------------------------------------
+        // LayoutManger
+        //------------------------------------------
+        // Use LinearLayoutManager
+        // shows items in a vertical or horizontal scrolling list (for RecyclerView)
         mRecyclerViewLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mRecyclerViewLayoutManager);
 
         // 1. get reponse from JSON by volley
         // 2. set values from list to adapter
         // 3. set adapter values recycler view
+
+        //-----------------------------------------------------
+        // mMyNewPptyDataToRecyclerViewList - Create data list
+        //-----------------------------------------------------
         JSON_DATA_WEB_CALL();
 
     }   //End of onCreate
@@ -75,6 +115,7 @@ public class Pg01NewProp extends BaseActivity {
 
         jsonArrayRequest = new JsonArrayRequest(GET_JSON_DATA_HTTP_URL,
 
+                //public interface Listener<T>
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
@@ -98,67 +139,46 @@ public class Pg01NewProp extends BaseActivity {
 
         for(int i = 0; i<array.length(); i++) {
 
-            GetDataAdapter getDataAdapterFromJson = new GetDataAdapter();
+            MyNewPptyData mMyNewPptyDataFromJson = new MyNewPptyData();
 
             JSONObject json = null;
             try {
 
                 json = array.getJSONObject(i);
 
-//                getDataAdapterFromJson.setNewPropertyNameChi(URLDecoder.decode(json.getString(JSON_PROPERTY_NAME_CHI), "UTF-8"));
-                getDataAdapterFromJson.setImageUrlNewPropertySmall(json.getString(JSON_IMAGE_URL_SMALL));
-                getDataAdapterFromJson.setNewPropertyNameChi(json.getString(JSON_PROPERTY_NAME_CHI));
-                getDataAdapterFromJson.setNewPropertyNameEng(json.getString(JSON_PROPERTY_NAME_ENG));
-                getDataAdapterFromJson.setNewPropertyAddress(json.getString(JSON_PROPERTY_ADDRESS));
+//                mMyNewPptyDataFromJson.setNewPropertyNameChi(URLDecoder.decode(json.getString(JSON_PROPERTY_NAME_CHI), "UTF-8"));
+                mMyNewPptyDataFromJson.setImageUrlNewPropertySmall(json.getString(JSON_IMAGE_URL_SMALL));
+                mMyNewPptyDataFromJson.setNewPropertyNameChi(json.getString(JSON_PROPERTY_NAME_CHI));
+                mMyNewPptyDataFromJson.setNewPropertyNameEng(json.getString(JSON_PROPERTY_NAME_ENG));
+                mMyNewPptyDataFromJson.setNewPropertyAddress(json.getString(JSON_PROPERTY_ADDRESS));
 
             } catch (JSONException e) {
 
                 e.printStackTrace();
             }
-            getDataAdapterToRecyclerViewList.add(getDataAdapterFromJson);
+            mMyNewPptyDataToRecyclerViewList.add(mMyNewPptyDataFromJson);
         }
 
-        // Create an adapter
-        mMyRecyclerViewAdapter = new MyRecyclerViewAdapter(getDataAdapterToRecyclerViewList, this);
-        mRecyclerView.setAdapter(mMyRecyclerViewAdapter);
+        //---------------------------------------------
+        // Create an myRecyclerViewAdapter > set adapter to recycler view
+        //---------------------------------------------
+        mMyRecyclerViewAdapterNewPpty = new MyRecyclerViewAdapterNewPpty(mMyNewPptyDataToRecyclerViewList, this);
+        mRecyclerView.setAdapter(mMyRecyclerViewAdapterNewPpty);
 
+        //------------------------------------------
         // #onClick: Revoke onItemClick from adapter
-        mMyRecyclerViewAdapter.setOnItemClickListener(
-                new MyRecyclerViewAdapter.OnRecyclerViewItemClickListener(){
+        //------------------------------------------
+        mMyRecyclerViewAdapterNewPpty.setOnItemClickListener(
+                new MyRecyclerViewAdapterNewPpty.OnRecyclerViewItemClickListener(){
                     @Override
-                    public void onItemClick(View view , GetDataAdapter singleViewData){
-                        Toast.makeText(Pg01NewProp.this, singleViewData.getNewPropertyNameEng(), Toast.LENGTH_LONG).show();
+                    public void onItemClick(View view , MyNewPptyData singleViewData){
+                        //New page
                         startActivity(new Intent(Pg01NewProp.this, Pg03NewPropDtl.class));
+                        //Toast
+                        Toast.makeText(Pg01NewProp.this, singleViewData.getNewPropertyNameEng(), Toast.LENGTH_LONG).show();
                     }
                 }
         );
     }
-
-/*
-
-    */
-/*
-    Button
-    *//*
-
-    Button subscribeButton = (Button) findViewById(R.id.subscribeButton);
-    subscribeButton.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            // [START subscribe_topics]
-            FirebaseMessaging.getInstance().subscribeToTopic("news");
-            Log.d(TAG, "Subscribed to news topic");
-            // [END subscribe_topics]
-        }
-    });
-
-    Button logTokenButton = (Button) findViewById(R.id.logTokenButton);
-    logTokenButton.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Log.d(TAG, "InstanceID token: " + FirebaseInstanceId.getInstance().getToken());
-        }
-    });
-*/
 
 }

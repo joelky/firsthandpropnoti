@@ -1,6 +1,6 @@
 package com.fcm.firsthandpptynoti.adapter;
 
-public class GetDataAdapter {
+public class MyNewPptyData {
 
     public String imageUrlNewPropertySmall;
     public String newPropertyNameChi;

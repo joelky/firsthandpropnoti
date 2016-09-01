@@ -5,6 +5,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ onCreate
         mTabLayout = (TabLayout) findViewById(R.id.tabs);
         mTabLayout.setupWithViewPager(mViewPager);
 
-    tablayout < viewpager < viewpager adapter
+tablayout < viewpager < viewpager adapter (extends FragmentPagerAdapter ) < fragment
 */
 public class Pg02Push extends BaseActivity {
 
@@ -64,13 +65,13 @@ public class Pg02Push extends BaseActivity {
     Tab
     */
     private void setupViewPager(ViewPager viewPager) {
-        MyViewPagerAdapter mViewPagerAdapter = new MyViewPagerAdapter(getSupportFragmentManager());
-        mViewPagerAdapter.addFragment(new Pg02Tab01MyPush(), "我的通知");     // Pg02Tab01MyPush - tab content page. 我的通知 - Tab name
-        mViewPagerAdapter.addFragment(new Pg02Tab02AllPush(), "全部通知");
-        mViewPagerAdapter.addFragment(new Pg02Tab03CriticalPush(), "重大通知");
-        mViewPagerAdapter.addFragment(new Pg02Tab04MySubs(), "我的訂閱");
-        mViewPagerAdapter.addFragment(new Pg02Tab05NotiSetting(), "設定通知");
-        viewPager.setAdapter(mViewPagerAdapter);
+        MyViewPagerAdapter mMyViewPagerAdapter = new MyViewPagerAdapter(getSupportFragmentManager());
+        mMyViewPagerAdapter.addFragment(new Pg02Tab01MyPush(), "我的通知");     // Pg02Tab01MyPush - tab content page. 我的通知 - Tab name
+        mMyViewPagerAdapter.addFragment(new Pg02Tab02AllPush(), "全部通知");
+        mMyViewPagerAdapter.addFragment(new Pg02Tab03CriticalPush(), "重大通知");
+        mMyViewPagerAdapter.addFragment(new Pg02Tab04MySubs(), "我的訂閱");
+        mMyViewPagerAdapter.addFragment(new Pg02Tab05NotiSetting(), "設定通知");
+        viewPager.setAdapter(mMyViewPagerAdapter);
     }
 
     /*
@@ -80,7 +81,7 @@ public class Pg02Push extends BaseActivity {
     This can result in using a significant amount of memory since fragment instances can hold on to an arbitrary amount of state.
     For larger sets of pages, consider FragmentStatePagerAdapter.
     */
-    class MyViewPagerAdapter extends FragmentPagerAdapter {
+    class MyViewPagerAdapter extends FragmentStatePagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
 
