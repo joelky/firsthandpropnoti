@@ -20,50 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:text="This is sample TextView Text with scrolling feature.This is sample TextView Text with scrolling feature.This is sample TextView Text with scrolling feature.This is sample TextView Text with scrolling feature.This is sample TextView Text with scrolling feature.This is sample TextView Text with scrolling feature.This is sample TextView Text with scrolling feature.This is sample TextView Text with scrolling feature.This is sample TextView Text with scrolling feature.This is sample TextView Text with scrolling feature.This is sample TextView Text with scrolling feature.This is sample TextView Text with scrolling feature.This is sample TextView Text with scrolling feature.This is sample TextView Text with scrolling feature.This is sample TextView Text with scrolling feature.This is sample TextView Text with scrolling feature.This is sample TextView Text with scrolling feature.This is sample TextView Text with scrolling feature.This is sample TextView Text with scrolling feature.This is sample TextView Text with scrolling feature.This is sample TextView Text with scrolling feature.This is sample TextView Text with scrolling feature.
-        This is sample TextView Text with
-        This is sample TextView Text with
-        This is sample TextView Text with
-        This is sample TextView Text with
-        This is sample TextView Text with
-        This is sample TextView Text with
-        This is sample TextView Text with
-        This is sample TextView Text with
-        This is sample TextView Text with
-        This is sample TextView Text with
-        This is sample TextView Text with
-        This is sample TextView Text with
-        This is sample TextView Text with
-        This is sample TextView Text with
-        This is sample TextView Text with
-        This is sample TextView Text with
-        This is sample TextView Text with
-        This is sample TextView Text with
-        This is sample TextView Text with
-        This is sample TextView Text with
-        This is sample TextView Text with
-        This is sample TextView Text with
-        This is sample TextView Text with
-        This is sample TextView Text with
-        This is sample TextView Text with
-        This is sample TextView Text with
-        This is sample TextView Text with
-        This is sample TextView Text with
-        This is sample TextView Text with
-        This is sample TextView Text with
-        This is sample TextView Text with
-        This is sample TextView Text with
-        This is sample TextView Text with
-        This is sample TextView Text with
-        This is sample TextView Text with
-        This is sample TextView Text with
-        This is sample TextView Text with
-        This is sample TextView Text with
-        This is sample TextView Text with
-        This is sample TextView Text with
-        This is sample TextView Text with
-        This is sample TextView Text with
-        This is sample TextView Text with"
+        android:text="This is sample TextView"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:scrollbars="vertical"
         />

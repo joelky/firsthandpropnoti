@@ -23,6 +23,13 @@ import com.fcm.firsthandpptynoti.adapter.MyRecyclerViewAdapterAllPush;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+
+getActivity() in a Fragment returns the Activity the Fragment is currently associated with.
+change "this" to getActivity(), and also getActivity().getResources()
+
+*/
+
 public class Pg02Tab02AllPush extends Fragment {
     private List<String> mList;
     private MyRecyclerViewAdapterAllPush mMyRecyclerViewAdapterAllPush;
@@ -47,19 +54,24 @@ public class Pg02Tab02AllPush extends Fragment {
         return view;
     }
  */
+    public Pg02Tab02AllPush() {
+        // Required empty public constructor
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initData();
-        initView();
+
     }
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(com.fcm.firsthandpptynoti.R.layout.pg02tab02_allpush, container, false);
+        View rootView = inflater.inflate(com.fcm.firsthandpptynoti.R.layout.pg02tab02_allpush,  container, false);
 
         //setContentView(R.layout.pg02tab02_allpush);
-
-        return view;
+        initData();
+        initView(rootView);
+        return rootView;
     }
 
     private void initData() {
@@ -70,8 +82,8 @@ public class Pg02Tab02AllPush extends Fragment {
         }
     }
 
-    private void initView() {
-        mRecyclerView = (RecyclerView) getActivity().findViewById(R.id.recyclerview_tab02_allpush);
+    private void initView(View rootView) {
+        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerview_tab02_allpush);
         //设置GridView
 //        setGridView();
         //设置ListView
@@ -83,7 +95,9 @@ public class Pg02Tab02AllPush extends Fragment {
 
 
     public void setListView(){
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(layoutManager);
 //        mRecyclerView.addItemDecoration(new DividerItemDecoration(RecyclerViewActivity.this, DividerItemDecoration.VERTICAL_LIST));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mMyRecyclerViewAdapterAllPush=new MyRecyclerViewAdapterAllPush(getActivity(), mList);
