@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:fitsSystemWindows="true"
     tools:context="com.fcm.firsthandpptynoti.MainActivity">
-
+-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Pg02Push">
     <!--
     AppBarLayout > Toolbar, TabLayout
     -->
     <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        android:layout_below="@+id/toolbar"
         >
 
         <!--TabLayout-->
@@ -33,5 +41,7 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         />
-
+</RelativeLayout>
+<!--
 </android.support.design.widget.CoordinatorLayout>
+-->
